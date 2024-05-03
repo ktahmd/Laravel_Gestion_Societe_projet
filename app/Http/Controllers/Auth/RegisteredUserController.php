@@ -16,6 +16,14 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     /**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct() {
+		$this->middleware('role:admin,staff');
+	}
+    /**
      * Display the registration view.
      */
     public function create(): View
