@@ -10,6 +10,18 @@
 	font-style: normal;
 }
 
+.logo-container {
+    display: flex;
+    justify-content: center;
+}
+
+.logo-container img {
+    display: block;
+    margin: 0 auto; /* Centers the image horizontally */
+}
+.larger-text {
+    font-size: 40px; /* Adjust the font size as needed */
+}
 .lnr {
 	font-family: 'Linearicons-Free';
 	speak: none;

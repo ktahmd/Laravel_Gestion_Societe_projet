@@ -13,9 +13,7 @@
             <h3 class="box-title">List of System Users</h3>
         </div>
 
-        <div class="box-header">
-            <a href="/register" class="btn btn-success" ><i class="fa fa-plus"></i> Add User</a>
-        </div>
+        
 
 
         <!-- /.box-header -->

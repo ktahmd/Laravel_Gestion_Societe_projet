@@ -30,8 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-Route::get('/user', [UserController::class, 'index']);
+Route::get('/user', [UserController::class, 'index'])->middleware('role');
 Route::get('/apiUser', [UserController::class, 'apiUsers'])->name('api.users');
 
 require __DIR__.'/auth.php';
