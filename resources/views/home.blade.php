@@ -11,7 +11,7 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>{{ 123 }}</h3>
+                <h3>{{\App\models\User::count()}}</h3>
 
                 <p>System Users</p>
             </div>
