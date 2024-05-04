@@ -78,7 +78,7 @@
             $('input[name=_method]').val('PATCH');
             $('#modal-form form')[0].reset();
             $.ajax({
-                url: "{{ url('users') }}" + '/' + id + "/edit",
+                url: "{{ url('user') }}" + '/' + id + "/edit",
                 type: "GET",
                 dataType: "JSON",
                 success: function(data) {
@@ -107,7 +107,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then(function () {
                 $.ajax({
-                    url : "{{ url('users') }}" + '/' + id,
+                    url : "{{ url('user') }}" + '/' + id,
                     type : "POST",
                     data : {'_method' : 'DELETE', '_token' : csrf_token},
                     success : function(data) {

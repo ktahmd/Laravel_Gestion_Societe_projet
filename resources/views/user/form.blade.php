@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-form" tabindex="1" role="dialog" aria-hidden="true" data-backdrop="static">
+<{{-- div class="modal fade" id="modal-form" tabindex="1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <form  id="form-item" method="post" class="form-horizontal" data-toggle="validator" enctype="multipart/form-data" >
@@ -58,3 +58,4 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+ --}}

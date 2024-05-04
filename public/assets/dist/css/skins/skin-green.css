@@ -3,7 +3,7 @@
  * -----------
  */
 .skin-green .main-header .navbar {
-  background-color:  #252c35;
+  background-color:  #08a35d;
 }
 .skin-green .main-header .navbar .nav > li > a {
   color: #ffffff;
@@ -29,7 +29,7 @@
   color: #fff;
 }
 .skin-green .main-header .navbar .sidebar-toggle:hover {
-  background-color: #e09e10;
+  background-color: #037640;
 }
 @media (max-width: 767px) {
   .skin-green .main-header .navbar .dropdown-menu li.divider {
@@ -59,11 +59,11 @@
 .skin-green .wrapper,
 .skin-green .main-sidebar,
 .skin-green .left-side {
-  background-color: #dadfe0;
+  background-color: #252c35;
 }
 .skin-green .user-panel > .info,
 .skin-green .user-panel > .info > a {
-  color: #000000;
+  color: #ffffff;
 }
 .skin-green .sidebar-menu > li.header {
   color: #4b646f;

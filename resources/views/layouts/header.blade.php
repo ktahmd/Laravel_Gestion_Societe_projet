@@ -59,14 +59,20 @@
                             <div class="pull-right">
                                 <a class="btn btn-danger btn-flat" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                   document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-                        
+                            
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
+                            
+                                <!-- Add the button for editing profile below the logout button -->
+                                <a class="btn btn-primary btn-flat" href="{{ route('profile.edit') }}">
+                                    {{ __('Edit Profile') }}
+                                </a>
                             </div>
+                            
                             <br>
                             {{-- <div class="pull-right">
                                 <a class="btn btn-danger btn-flat" href="{{ route('profile.edit') }}"
