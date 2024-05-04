@@ -13,8 +13,9 @@ class RoleMiddleware
         if ($request->user() && $request->user()->role === 'admin') {
             return $next($request);
         }
+        
 
         // If not an admin, return error response
-        return response()->view('errors.unauthorized', [], 403); // 403: Forbidden
+        return response()->view('errors.403', [], 403); // 403: Forbidden
     }
 }
