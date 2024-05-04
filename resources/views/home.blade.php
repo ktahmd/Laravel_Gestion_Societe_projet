@@ -57,12 +57,13 @@
             <div class="inner">
                 <h3>{{ 34 }}</h3>
 
-                <p>Customer</p>
+            <p>client</p>
             </div>
             <div class="icon">
                 <i class="fa fa-users"></i>
             </div>
-            {{-- <a href="{{ route('customers.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+            <a href="{{ route('client.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            
         </div>
     </div>
     <!-- ./col -->

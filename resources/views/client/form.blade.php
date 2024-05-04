@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-form" tabindex="1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
+    <div class="modal-dialog"><!-- Log on to codeastro.com for more projects! -->
         <div class="modal-content">
             <form  id="form-item" method="post" class="form-horizontal" data-toggle="validator" enctype="multipart/form-data" >
                 {{ csrf_field() }} {{ method_field('POST') }}
@@ -41,7 +41,7 @@
                         </div>
 
 
-                    </div>
+                    </div><!-- Log on to codeastro.com for more projects! -->
                     <!-- /.box-body -->
 
                 </div>

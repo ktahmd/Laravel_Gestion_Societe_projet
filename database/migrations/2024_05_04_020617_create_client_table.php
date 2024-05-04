@@ -9,6 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    
     public function up(): void
     {
         Schema::create('client', function (Blueprint $table) {
@@ -31,3 +32,4 @@ return new class extends Migration
         Schema::dropIfExists('client');
     }
 };
+

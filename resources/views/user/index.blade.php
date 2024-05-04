@@ -70,30 +70,18 @@
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
                 {data: 'role', name: 'role'},
-                {data: 'action', name: 'action', orderable: false, searchable: false}
+                {
+            data: 'action',
+            name: 'action',
+            orderable: false,
+            searchable: false,
+            render: function(data, type, full, meta) {
+                return '<a onclick="deleteData(' + full.id + ')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            }
+        }
             ]
         });
-        function editForm(id) {
-            save_method = 'edit';
-            $('input[name=_method]').val('PATCH');
-            $('#modal-form form')[0].reset();
-            $.ajax({
-                url: "{{ url('user') }}" + '/' + id + "/edit",
-                type: "GET",
-                dataType: "JSON",
-                success: function(data) {
-                    $('#modal-form').modal('show');
-                    $('.modal-title').text('Edit Suppliers');
-
-                    $('#id').val(data.id);
-                    $('#name').val(data.name);
-                    $('#email').val(data.email);
-                },
-                error : function() {
-                    alert("Nothing Data");
-                }
-            });
-        }
+        
 
         function deleteData(id){
             var csrf_token = $('meta[name="csrf-token"]').attr('content');
@@ -131,44 +119,7 @@
             });
         }
 
-        $(function(){
-            $('#modal-form form').validator().on('submit', function (e) {
-                if (!e.isDefaultPrevented()){
-                    var id = $('#id').val();
-                    if (save_method == 'add') url = "{{ url('suppliers') }}";
-                    else url = "{{ url('suppliers') . '/' }}" + id;
 
-                    $.ajax({
-                        url : url,
-                        type : "POST",
-                        //hanya untuk input data tanpa dokumen
-//                      data : $('#modal-form form').serialize(),
-                        data: new FormData($("#modal-form form")[0]),
-                        contentType: false,
-                        processData: false,
-                        success : function(data) {
-                            $('#modal-form').modal('hide');
-                            table.ajax.reload();
-                            swal({
-                                title: 'Success!',
-                                text: data.message,
-                                type: 'success',
-                                timer: '1500'
-                            })
-                        },
-                        error : function(data){
-                            swal({
-                                title: 'Oops...',
-                                text: data.message,
-                                type: 'error',
-                                timer: '1500'
-                            })
-                        }
-                    });
-                    return false;
-                }
-            });
-        });
     </script>
 
 @endsection

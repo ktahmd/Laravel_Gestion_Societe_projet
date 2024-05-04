@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use  App\Http\Controllers\ClientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,5 +32,14 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/user', [UserController::class, 'index'])->middleware('role');
 Route::get('/apiUser', [UserController::class, 'apiUsers'])->name('api.users');
+Route::get('user/{id}/edit', [UserController::class, 'edit']);
+Route::delete('user/{id}', [UserController::class, 'destroy']);
+
+
+Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+Route::get('/apiclient', [clientController::class, 'apiclient'])->name('api.client');
+
+Route::get('/exportclientAll', [clientController::class, 'exportclientAll'])->name('exportPDF.clientAll');
+Route::get('/exportclientAllExcel', [clientController::class, 'exportExcel'])->name('exportExcel.clientAll');
 
 require __DIR__.'/auth.php';
