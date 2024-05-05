@@ -36,8 +36,16 @@ Route::get('user/{id}/edit', [UserController::class, 'edit']);
 Route::delete('user/{id}', [UserController::class, 'destroy']);
 
 
+
 Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+Route::post('/client', [ClientController::class, 'store'])->name('client.store');
 Route::get('/apiclient', [clientController::class, 'apiclient'])->name('api.client');
+
+Route::delete('client/{id}', [clientController::class, 'destroy']);
+Route::get('client/{id}/edit', [clientController::class, 'edit']);
+Route::patch('client/{id}/update', [clientController::class, 'update']);
+
+
 
 Route::get('/exportclientAll', [clientController::class, 'exportclientAll'])->name('exportPDF.clientAll');
 Route::get('/exportclientAllExcel', [clientController::class, 'exportExcel'])->name('exportExcel.clientAll');

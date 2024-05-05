@@ -5,6 +5,7 @@ use App\models\client;
 use App\Exports\ExportClient;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Http\RedirectResponse;
 use Excel;
 use PDF;
 
@@ -43,11 +44,12 @@ class clientController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request, [
-            'nom'      => 'required',
-            'adresse'    => 'required',
-            'email'     => 'required|unique:client',
-            'telephone'   => 'required',
+            'nom'      => 'required|string|min:2',
+            'adresse'    => 'required|string|max:50',
+            'email'     => 'required|string|email|max:50|unique:client',
+            'telephone'   => 'required|string|max:20',
         ]);
 
         client::create($request->all());
@@ -78,7 +80,9 @@ class clientController extends Controller
      */
     public function edit($id)
     {
-        $client = client::find($id);
+        // Use where method to query the database
+        $client = Client::where('id', $id)->first();
+
         return $client;
     }
 
@@ -92,14 +96,13 @@ class clientController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nom'      => 'required|string|min:2',
-            'adresse'    => 'required|string|min:2',
-            'email'     => 'required|string|email|max:255|unique:client',
-            'telephone'   => 'required|string|min:2',
+           'nom'      => 'required|string|min:2',
+            'adresse'    => 'required|string|max:50',
+            'email'     => 'required|string|email|max:50|unique:client,email,' . $request->id,
+            'telephone'   => 'required|string|max:20',
         ]);
 
         $client = client::findOrFail($id);
-
         $client->update($request->all());
 
         return response()->json([
@@ -147,7 +150,7 @@ class clientController extends Controller
 
     public function exportExcel()
     {
-        return (new ExportClient)->download('client.xlsx');
+        return (new Exportclient)->download('client.xlsx'); 
     }
 }
 

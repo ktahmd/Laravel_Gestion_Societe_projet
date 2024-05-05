@@ -7,7 +7,8 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class Exportclients implements FromView
+
+class Exportclient implements FromView
 {
     /**
      * melakukan format dokumen menggunakan html, maka package ini juga menyediakan fungsi lainnya agar dapat me-load data tersebut dari file html / blade di Laravel
@@ -17,8 +18,8 @@ class Exportclients implements FromView
     public function view(): View
     {
         // TODO: Implement view() method.
-        return view('clients.clientsAllExcel',[
-            'clients' => client::all()
+        return view('client.clientAllExcel',[
+            'client' => client::all()
         ]);
     }
 }
