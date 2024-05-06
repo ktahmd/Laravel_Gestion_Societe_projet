@@ -17,11 +17,11 @@
             <table id="factures-table" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Contact</th>
+                    <th>client_id</th>
+                    <td>produit_id</th>
+                    <th>commandes_id</th>
+                    <th>qty</th>
+                    <th>prix_total</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
