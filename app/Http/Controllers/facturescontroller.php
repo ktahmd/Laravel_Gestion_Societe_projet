@@ -48,7 +48,8 @@ class facturesController extends Controller
     {
         
         $this->validate($request, [
-            
+            'qty' => 'required|integer',
+            'prix_total' => 'required|numeric'
             
         ]);
 
@@ -97,7 +98,7 @@ class facturesController extends Controller
     {
         $this->validate($request, [
             'qty' => 'required|integer',
-            'prix_total' => 'required|numeric',
+            'prix_total' => 'required|numeric'
            
         ]);
 
@@ -106,7 +107,7 @@ class facturesController extends Controller
 
         return response()->json([
             'success'    => true,
-            'message'    => 'factures Updated'
+            'message'    => 'factures Updated',
         ]);
     }
 
