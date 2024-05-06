@@ -47,8 +47,13 @@
                         
                         <input type="hidden" id="id" name="id">
                         <div class="form-group">
-                            <label for="nom" class="control-label">Name:</label>
-                            <input type="text" class="form-control" id="nom" name="nom" autofocus required/>
+                            <label for="client_id" class="control-label">client:</label>
+                            <select name="client_id" id="client_id" class="form-control select" required>
+                                <option value="">-- choisir le client --</option>
+                                @foreach($clients as $client)
+                                    <option value="{{ $client->id }}">{{ $client->nom }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="adresse" class="control-label">Address:</label>
