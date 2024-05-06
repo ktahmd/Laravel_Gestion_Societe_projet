@@ -25,6 +25,8 @@ class Categories extends Model
         
     ];
     
+    
+    
 }
 
 

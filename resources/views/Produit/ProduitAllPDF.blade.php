@@ -32,7 +32,7 @@
         <td>description</td>
     </tr>
     </thead>
-    @foreach($categories as $c)
+    @foreach($produit as $c)
         <tbody>
         <tr>
             <td>{{ $c->id }}</td>

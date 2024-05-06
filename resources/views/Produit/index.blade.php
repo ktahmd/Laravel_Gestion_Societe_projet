@@ -3,18 +3,18 @@
 @section('content')
     <div class="box box-success">
         <div class="box-header">
-            <h3 class="box-title">List of clients</h3>
+            <h3 class="box-title">List of produits</h3>
         </div>
 
         <div class="box-header">
-            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add client</a>
-            <a href="{{ route('exportPDF.clientAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
-            <a href="{{ route('exportExcel.clientAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
+            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add produit</a>
+            <a href="{{ route('exportPDF.ProduitAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
+            <a href="{{ route('exportExcel.ProduitAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
         </div>
 
         <!-- /.box-header -->
         <div class="box-body">  
-            <table id="client-table" class="table table-bordered table-hover table-striped">
+            <table id="produit-table" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
                     <th>id</th>
@@ -22,7 +22,7 @@
                     <th>Description</th>
                     <th>Prix</th>
                     <th>quantite_stock</th>
-                    <th>categorie_id</th>
+                    <th>categorie</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -52,16 +52,20 @@
                             <input type="text" class="form-control" id="nom" name="nom" autofocus required/>
                         </div>
                         <div class="form-group">
-                            <label for="adresse" class="control-label">Address:</label>
-                            <input type="text" class="form-control" id="adresse" name="adresse" required/>
+                            <label for="description" class="control-label">Description:</label>
+                            <input type="text" class="form-control" id="description" name="description"     />
                         </div>
                         <div class="form-group">
-                            <label for="email" class="control-label">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" required/>
+                            <label for="prix" class="control-label">prix:</label>
+                            <input type="text" class="form-control" id="prix" name="prix" required/>
                         </div>
                         <div class="form-group">
-                            <label for="categories" class="control-label">Catogories:</label>
-                            {!! Form::select('categories_id', App\Models\Categories::pluck('nom', 'id'), null, ['class' => 'form-control select', 'placeholder' => '-- Choose category --', 'id' => 'categories_id', 'required']) !!}
+                            <label for="quantite_stock" class="control-label">qantite:</label>
+                            <input type="text" class="form-control" id="quantite_stock" name="quantite_stock" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="categories_id" class="control-label">Catogories:</label>
+                            {!! Form::select('categorie_id', App\Models\Categories::pluck('nom', 'id'), null, ['class' => 'form-control select', 'placeholder' => '-- Choose category --', 'id' => 'categorie_id', 'required']) !!}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -84,53 +88,65 @@
     <script src="{{ asset('assets/validator/validator.min.js') }}"></script>
 
     <script type="text/javascript">
-        var table = $('#client-table').DataTable({
+        var table = $('#produit-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('api.client') }}",
+            ajax: "{{ route('api.Produit') }}",
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'nom', name: 'nom'},
-                {data: 'Description', name: 'Description'},
-                {data: 'categorie_id', name: 'categorie_id'},
-                {data: 'Prix', name: 'Prix'},
+                {data: 'description', name: 'description'},
+                {data: 'prix', name: 'prix'},
                 {data: 'quantite_stock', name: 'quantite_stock'},
+                {data: 'categorie_nom', name: 'categorie_nom'}, // Changed 'orderable' to true for sorting
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+    
 
         function addForm() {
-            save_method = "add";
-            $('input[name=_method]').val('POST');
-            $('#modal-form').modal('show');
-            $('.modal-title').text('Add client');
-            $('#form-item')[0].reset();
-            $('#id').val('');
-        }
-    function editForm(id) {
+    save_method = "add";
+    $('input[name=_method]').val('POST');
+    $('#modal-form').modal('show');
+    $('.modal-title').text('Add produit');
+    $('#form-item')[0].reset();
+    $('#id').val('');
+    
+    // Reset the select dropdown to its default value
+    $('#categories_id').val('').trigger('change'); // Assuming you're using a library like Select2
+    
+    // Optional: You can also reset the validation state of the form fields
+    $('#form-item').validator('destroy').validator();
+    
+    // Capture the value of categorie_id when the form is opened
+    var categorieId = $('#categories_id').val();
+    // Set the value of categorie_id field in the form
+    $('input[name=categorie_id]').val(categorieId);
+}
+
+        function editForm(id) {
     save_method = 'edit';
     $('input[name=_method]').val('PATCH');
     $('#modal-form form')[0].reset();
     $.ajax({
-        url: "{{ url('client') }}" + '/' + id + "/edit",
+        url: "{{ url('Produit') }}" + '/' + id + "/edit",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
             $('#modal-form').modal('show');
-            $('.modal-title').text('Edit client');
+            $('.modal-title').text('Edit produit');
             $('#id').val(data.id); 
             $('#nom').val(data.nom); 
-            $('#Description').val(data.Description);  
-            $('#categorie_id').val(data.categorie_id);
-            $('#Prix').val(data.Prix);
+            $('#description').val(data.description); 
+            $('#categories_id').val(data.categorie_id);  
+            $('#prix').val(data.prix);  
             $('#quantite_stock').val(data.quantite_stock);
-            $('#Prix').val(data.Prix);
-            {data: 'action', name: 'action', orderable: false, searchable: false}
         },
         error : function() {
             alert("Nothing Data");
         }
     });
+
 }
 
     function deleteData(id){
@@ -145,7 +161,7 @@
         confirmButtonText: 'Yes, delete it!'
     }).then(function () {
         $.ajax({
-            url : "{{ url('client') }}" + '/' + id,
+            url : "{{ url('Produit') }}" + '/' + id,
             type : "POST",
             data : {'_method' : 'DELETE', '_token' : csrf_token},
             success : function(data) {
@@ -173,9 +189,9 @@ $(function(){
     $('#modal-form form').validator().on('submit', function (e) {
         e.preventDefault(); // Prevent default form submission
         var id = $('#id').val();
-        var url = "{{ url('client') }}";
+        var url = "{{ url('Produit') }}";
         if (save_method == 'edit') {
-            url = "{{ url('client') }}" + '/' + id + "/update";
+            url = "{{ url('Produit') }}" + '/' + id + "/update";
         }
 
         // Retrieve CSRF token value from meta tag
