@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\models\Produit;
 use App\Exports\ExportProduit;;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
