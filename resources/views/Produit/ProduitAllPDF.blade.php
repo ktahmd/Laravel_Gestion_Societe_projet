@@ -27,10 +27,9 @@
 <table id="categories" width="100%">
     <thead>
     <tr>
-        <td>ID</td>
+    <td>ID</td>
         <td>Nom</td>
         <td>description</td>
-       
     </tr>
     </thead>
     @foreach($categories as $c)
@@ -38,14 +37,13 @@
         <tr>
             <td>{{ $c->id }}</td>
             <td>{{ $c->nom }}</td>
-            <td>{{ $c->description}}</td>
+            <td>{{ $c->descripyion}}</td>
            
         </tr>
         </tbody>
     @endforeach
 
 </table>
-
 
 
 
