@@ -94,12 +94,10 @@ class Produitcontroller extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            
                 'nom' => 'required|string|min:2',
                 'description' => 'nullable|string|max:50', // 'description' peut être nullable
-                'prix' => 'required|numeric|max:50|unique:produit,prix,' . $request->id,
-                'categorie_id' => 'required|string|max:20',
-                'quantite_stock' => 'required|integer|max:20'
+                'prix' => 'required|numeric',
+                'quantite_stock' => 'required|integer'
             
             
         ]);

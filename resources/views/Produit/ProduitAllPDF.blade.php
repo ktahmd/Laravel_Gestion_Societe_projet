@@ -27,9 +27,10 @@
 <table id="categories" width="100%">
     <thead>
     <tr>
-    <td>ID</td>
         <td>Nom</td>
-        <td>description</td>
+        <td>Description</td>
+        <td>Prix</td>
+        <td>
     </tr>
     </thead>
     @foreach($produit as $c)
