@@ -47,7 +47,10 @@ class Produitcontroller extends Controller
     {
         
         $this->validate($request, [
-           
+            'nom' => 'required|string|min:2',
+            'description' => 'nullable|string|max:50', // 'description' peut être nullable
+            'prix' => 'required|numeric',
+            'quantite_stock' => 'required|integer'
         ]);
     
         Produit::create($request->all());

@@ -99,7 +99,8 @@ class Categoriescontroller extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-          
+            'nom' => 'required|unique:categories,nom,' . $request->id,
+            'description' => 'required'
         ]);
 
         $categories = categories::findOrFail($id);
