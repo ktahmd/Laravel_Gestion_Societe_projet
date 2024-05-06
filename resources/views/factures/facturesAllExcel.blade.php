@@ -1,21 +1,21 @@
 
 <style>
-    #categories {
+    #factures {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         width: 100%;
     }
 
-    #categories td, #categories th {
+    #factures td, #factures th {
         border: 1px solid #ddd;
         padding: 8px;
     }
 
-    #categories tr:nth-child(even){background-color: #f2f2f2;}
+    #factures tr:nth-child(even){background-color: #f2f2f2;}
 
-    #categories tr:hover {background-color: #ddd;}
+    #factures tr:hover {background-color: #ddd;}
 
-    #categories th {
+    #factures th {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
@@ -24,24 +24,28 @@
     }
 </style>
 
-<table id="categories" width="100%">
+<table id="factures" width="100%">
     <thead>
     <tr>
-        <td>ID</td>
-        <td>Name</td>
-        <td>Tel</td>
-        <td>Address</td>
-        <td>Email</td>
+    <td>ID</td>
+        <td>client_id</td>
+        <td>produit_id</td>
+        <td>commandes_id</td>
+        <td>qty</td>
+        <td>prix_total</td>
+    </tr>
+    <td>{{ $c->id }}</td>
+            <td>{{ $c->client_id}}</td>
+            <td>{{ $c->produit_id }}</td>
+            <td>{{ $c->commandes_id }}</td>
+            <td>{{ $c->qty}}</td>
+            <td>{{ $c->prix_total}}</td>
     </tr>
     </thead>
     @foreach($client as $c)
         <tbody>
         <tr>
-            <td>{{ $c->id }}</td>
-            <td>{{ $c->nom }}</td>
-            <td>{{ $c->telephone }}</td>
-            <td>{{ $c->adresse }}</td>
-            <td>{{ $c->email }}</td>
+           
         </tr>
         </tbody>
     @endforeach
