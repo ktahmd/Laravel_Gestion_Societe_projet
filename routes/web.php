@@ -7,6 +7,7 @@ use  App\Http\Controllers\ClientController;
 use App\Http\Controllers\Commandescontroller;
 use  App\Http\Controllers\CategoriesController;
 use  App\Http\Controllers\ProduitController;
+use  App\Http\Controllers\facturesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,6 +77,16 @@ Route::get('Produit/{id}/edit', [ProduitController::class, 'edit']);
 Route::patch('Produit/{id}/update', [ProduitController::class, 'update']);
 Route::get('/exportProduitAll', [ProduitController::class, 'exportProduitAll'])->name('exportPDF.ProduitAll');
 Route::get('/exportProduitAllExcel', [ProduitController::class, 'exportExcel'])->name('exportExcel.ProduitAll');
+
+
+Route::get('/factures', [facturesController::class, 'index'])->name('factures.index');
+Route::post('/factures', [facturesController::class, 'store'])->name('factures.store');
+Route::get('/apifactures', [facturesController::class, 'apifactures'])->name('api.factures');
+Route::delete('factures/{id}', [facturesController::class, 'destroy']);
+Route::get('factures/{id}/edit', [facturesController::class, 'edit']);
+Route::patch('factures/{id}/update', [facturesController::class, 'update']);
+Route::get('/exportfacturesAll', [facturesController::class, 'exportfacturesAll'])->name('exportPDF.facturesAll');
+Route::get('/exportfacturesAllExcel', [facturesController::class, 'exportExcel'])->name('exportExcel.facturesAll');
 
 
 require __DIR__.'/auth.php';
