@@ -47,7 +47,7 @@
             <div class="icon">
                 <i class="fa fa-cubes"></i>
             </div>
-            {{-- <a href="{{ route('products.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+             <a href="{{ route('products.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
         </div>
     </div>
     <!-- ./col -->
