@@ -57,5 +57,14 @@ Route::patch('categories/{id}/update', [categoriesController::class, 'update']);
 Route::get('/exportcategoriesAll', [categoriesController::class, 'exportcategoriesAll'])->name('exportPDF.categoriesAll');
 Route::get('/exportcategoriesAllExcel', [categoriesController::class, 'exportExcel'])->name('exportExcel.categoriesAll');
 
+Route::get('/commandes', [commandesController::class, 'index'])->name('commandes.index');
+Route::post('/commandes', [commandesController::class, 'store'])->name('commandes.store');
+Route::get('/apicommandes', [commandesController::class, 'apicommandes'])->name('api.commandes');
+Route::delete('commandes/{id}', [commandesController::class, 'destroy']);
+Route::get('commandes/{id}/edit', [commandesController::class, 'edit']);
+Route::patch('commandes/{id}/update', [commandesController::class, 'update']);
+Route::get('/exportcommandesAll', [commandesController::class, 'exportcommandesAll'])->name('exportPDF.commandesAll');
+Route::get('/exportcommandesAllExcel', [commandesController::class, 'exportExcel'])->name('exportExcel.commandesAll');
+
 
 require __DIR__.'/auth.php';

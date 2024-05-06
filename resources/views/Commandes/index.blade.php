@@ -18,10 +18,10 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Contact</th>
+                    <th>Date_commande</th>
+                    <th>Client_id</th>
+                    <th>Produit_id</th>
+                    <th>qty</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -32,7 +32,7 @@
     </div>
 
     <!-- Modal -->
-    {{-- <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -47,18 +47,16 @@
                         
                         <input type="hidden" id="id" name="id">
                         <div class="form-group">
-                            <label for="client_id" class="control-label">client ID:</label>
-                            <select name="client_id" id="client_id" class="form-control select" required>
-                                <option value="">-- choisir le commandes --</option>
-                                @foreach($commandes as $commandes_id)
-                                    <option value="{{ $commandes->id }}">{{ $commandes->client_id }}</option>
-                                @endforeach
-                            </select>
+                            <label for="client_id" class="control-label">Name:</label>
+                            <input type="text" class="form-control" id="client_id" name="client_id" />
                         </div>
                         <div class="form-group">
                             <label for="adresse" class="control-label">Address:</label>
-                            <input type="text" class="form-control" id="adresse" name="adresse" required/>
+                            {!! Form::select('client_id', $client, null, ['class' => 'form-control select', 'placeholder' => '-- Choose Product --', 'id' => 'client_id', 'required']) !!}
+                            <span class="help-block with-errors"></span>
                         </div>
+
+          
                         <div class="form-group">
                             <label for="email" class="control-label">Email:</label>
                             <input type="email" class="form-control" id="email" name="email" required/>
@@ -75,7 +73,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
 @endsection
 
@@ -94,10 +92,10 @@
             ajax: "{{ route('api.commandes') }}",
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'nom', name: 'nom'},
-                {data: 'adresse', name: 'adresse'},
-                {data: 'email', name: 'email'},
-                {data: 'telephone', name: 'telephone'},
+                {data: 'Date_command', name: 'Date_command'},
+                {data: 'Client_id', name: 'Client_id'},
+                {data: 'Produit_id', name: 'Produit_id'},
+                {data: 'qty', name: 'qty'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -122,10 +120,10 @@
             $('#modal-form').modal('show');
             $('.modal-title').text('Edit commandes');
             $('#id').val(data.id); 
-            $('#nom').val(data.nom); 
-            $('#adresse').val(data.adresse);  
-            $('#email').val(data.email);
-            $('#telephone').val(data.telephone);
+            $('#Date_command').val(data.Date_command); 
+            $('#client_id').val(data.client_id);  
+            $('#Produit_id').val(data.Produit_id);
+            $('#qty').val(data.qty);
         },
         error : function() {
             alert("Nothing Data");
