@@ -57,7 +57,7 @@
                         </div>
                         <div class="form-group">
                             <label for="prix" class="control-label">prix:</label>
-                            <input type="text" class="form-control" id="prix" name="prix" required/>
+                            <input type="text" class="form-control" id="prix" name="prix" autofocus required/>
                         </div>
                         <div class="form-group">
                             <label for="quantite_stock" class="control-label">qantite:</label>
