@@ -17,11 +17,12 @@
             <table id="client-table" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Contact</th>
+                    <th>id</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>quantite_stock</th>
+                    <th>categorie_id</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -32,7 +33,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!--<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -70,7 +71,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
 @endsection
 
@@ -90,9 +91,10 @@
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'nom', name: 'nom'},
-                {data: 'adresse', name: 'adresse'},
-                {data: 'email', name: 'email'},
-                {data: 'telephone', name: 'telephone'},
+                {data: 'Description', name: 'Description'},
+                {data: 'categorie_id', name: 'categorie_id'},
+                {data: 'Prix', name: 'Prix'},
+                {data: 'quantite_stock', name: 'quantite_stock'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -118,9 +120,12 @@
             $('.modal-title').text('Edit client');
             $('#id').val(data.id); 
             $('#nom').val(data.nom); 
-            $('#adresse').val(data.adresse);  
-            $('#email').val(data.email);
-            $('#telephone').val(data.telephone);
+            $('#Description').val(data.Description);  
+            $('#categorie_id').val(data.categorie_id);
+            $('#Prix').val(data.Prix);
+            $('#quantite_stock').val(data.quantite_stock);
+            $('#Prix').val(data.Prix);
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         },
         error : function() {
             alert("Nothing Data");
