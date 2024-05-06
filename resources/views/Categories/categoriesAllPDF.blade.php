@@ -37,7 +37,7 @@
         <tr>
             <td>{{ $c->id }}</td>
             <td>{{ $c->nom }}</td>
-            <td>{{ $c->descripyion}}</td>
+            <td>{{ $c->description}}</td>
            
         </tr>
         </tbody>

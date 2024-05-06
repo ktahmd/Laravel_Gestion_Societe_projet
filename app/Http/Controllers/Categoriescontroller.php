@@ -8,7 +8,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Http\RedirectResponse;
 use Excel;
 use PDF;
-use Illuminate\Support\Facades\Log;
+
 
 
 class Categoriescontroller extends Controller
