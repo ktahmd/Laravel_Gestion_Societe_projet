@@ -8,6 +8,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Http\RedirectResponse;
 use Excel;
 use PDF;
+use Illuminate\Support\Facades\Log;
 
 
 class Categoriescontroller extends Controller
@@ -44,20 +45,23 @@ class Categoriescontroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        
-        $this->validate($request, [
-           
-        ]);
+{
+    
+    // Validate the request data
+    $this->validate($request, [
+        'nom' => 'required',
+        'description' => 'required'
+    ]);
 
-        categories::create($request->all());
+    // Create a new record in the categories table
+    categories::create($request->all());
 
-        return response()->json([
-            'success'    => true,
-            'message'    => 'categories Created'
-        ]);
-
-    }
+    // Return a JSON response
+    return response()->json([
+        'success'    => true,
+        'message'    => 'categories Created'
+    ]);
+}
 
     /**
      * Display the specified resource.

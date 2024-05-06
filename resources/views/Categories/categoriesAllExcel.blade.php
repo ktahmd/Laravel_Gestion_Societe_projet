@@ -33,7 +33,7 @@
        
     </tr>
     </thead>
-    @foreach($categoriesas $c)
+    @foreach($categoriesas as $c)
         <tbody>
         <tr>
             <td>{{ $c->id }}</td>

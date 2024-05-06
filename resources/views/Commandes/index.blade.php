@@ -3,18 +3,18 @@
 @section('content')
     <div class="box box-success">
         <div class="box-header">
-            <h3 class="box-title">List of clients</h3>
+            <h3 class="box-title">List of commandess</h3>
         </div>
 
         <div class="box-header">
-            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add client</a>
-            <a href="{{ route('exportPDF.clientAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
-            <a href="{{ route('exportExcel.clientAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
+            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add commandes</a>
+            <a href="{{ route('exportPDF.commandesAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
+            <a href="{{ route('exportExcel.commandesAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
         </div>
 
         <!-- /.box-header -->
         <div class="box-body">  
-            <table id="client-table" class="table table-bordered table-hover table-striped">
+            <table id="commandes-table" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -32,7 +32,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    {{-- <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -47,11 +47,11 @@
                         
                         <input type="hidden" id="id" name="id">
                         <div class="form-group">
-                            <label for="client_id" class="control-label">client:</label>
+                            <label for="client_id" class="control-label">client ID:</label>
                             <select name="client_id" id="client_id" class="form-control select" required>
-                                <option value="">-- choisir le client --</option>
-                                @foreach($clients as $client)
-                                    <option value="{{ $client->id }}">{{ $client->nom }}</option>
+                                <option value="">-- choisir le commandes --</option>
+                                @foreach($commandes as $commandes_id)
+                                    <option value="{{ $commandes->id }}">{{ $commandes->client_id }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 @endsection
 
@@ -88,10 +88,10 @@
     <script src="{{ asset('assets/validator/validator.min.js') }}"></script>
 
     <script type="text/javascript">
-        var table = $('#client-table').DataTable({
+        var table = $('#commandes-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('api.client') }}",
+            ajax: "{{ route('api.commandes') }}",
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'nom', name: 'nom'},
@@ -106,7 +106,7 @@
             save_method = "add";
             $('input[name=_method]').val('POST');
             $('#modal-form').modal('show');
-            $('.modal-title').text('Add client');
+            $('.modal-title').text('Add commandes');
             $('#form-item')[0].reset();
             $('#id').val('');
         }
@@ -115,12 +115,12 @@
     $('input[name=_method]').val('PATCH');
     $('#modal-form form')[0].reset();
     $.ajax({
-        url: "{{ url('client') }}" + '/' + id + "/edit",
+        url: "{{ url('commandes') }}" + '/' + id + "/edit",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
             $('#modal-form').modal('show');
-            $('.modal-title').text('Edit client');
+            $('.modal-title').text('Edit commandes');
             $('#id').val(data.id); 
             $('#nom').val(data.nom); 
             $('#adresse').val(data.adresse);  
@@ -145,7 +145,7 @@
         confirmButtonText: 'Yes, delete it!'
     }).then(function () {
         $.ajax({
-            url : "{{ url('client') }}" + '/' + id,
+            url : "{{ url('commandes') }}" + '/' + id,
             type : "POST",
             data : {'_method' : 'DELETE', '_token' : csrf_token},
             success : function(data) {
@@ -173,9 +173,9 @@ $(function(){
     $('#modal-form form').validator().on('submit', function (e) {
         e.preventDefault(); // Prevent default form submission
         var id = $('#id').val();
-        var url = "{{ url('client') }}";
+        var url = "{{ url('commandes') }}";
         if (save_method == 'edit') {
-            url = "{{ url('client') }}" + '/' + id + "/update";
+            url = "{{ url('commandes') }}" + '/' + id + "/update";
         }
 
         // Retrieve CSRF token value from meta tag

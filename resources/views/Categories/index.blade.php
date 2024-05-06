@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description" class="control-label">description:</label>
-                            <input type="text" class="form-control" id="description" name="adresse" />
+                            <input type="text" class="form-control" id="description" name="description" />
                         </div>
                        
                         <div class="modal-footer">
