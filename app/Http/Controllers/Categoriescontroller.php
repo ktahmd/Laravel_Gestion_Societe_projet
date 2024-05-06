@@ -149,4 +149,3 @@ class Categoriescontroller extends Controller
     }
 }
 
-

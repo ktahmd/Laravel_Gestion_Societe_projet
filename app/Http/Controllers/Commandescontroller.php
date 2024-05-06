@@ -93,8 +93,7 @@ class Commandescontroller extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'client_id'    => 'required|string|max:50',
-            'date commande' => 'required|string|max:20',
+            
         ]);
 
         $Commandes = Commandes::findOrFail($id);
@@ -148,5 +147,6 @@ class Commandescontroller extends Controller
         return (new ExportCommandes)->download('Commandes.xlsx'); 
     }
 }
+
 
 

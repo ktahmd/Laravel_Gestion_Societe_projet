@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description" class="control-label">description:</label>
-                            <input type="text" class="form-control" id="description" name="adresse" required/>
+                            <input type="text" class="form-control" id="description" name="adresse" />
                         </div>
                        
                         <div class="modal-footer">
@@ -108,9 +108,8 @@
             $('.modal-title').text('Edit categories');
             $('#id').val(data.id); 
             $('#nom').val(data.nom); 
-            $('#adresse').val(data.adresse);  
-            $('#email').val(data.email);
-            $('#telephone').val(data.telephone);
+            $('#description').val(data.description);  
+            
         },
         error : function() {
             alert("Nothing Data");
