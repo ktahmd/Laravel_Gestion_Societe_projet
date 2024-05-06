@@ -18,8 +18,5 @@ class Produit extends Model
         'quantite_stock',
     ];
 
-    public function categorie()
-    {
-        return $this->belongsTo(Categorie::class,'categorie_id');
-    }
+
 }

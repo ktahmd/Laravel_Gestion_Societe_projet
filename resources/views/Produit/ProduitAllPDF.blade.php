@@ -27,25 +27,23 @@
 <table id="categories" width="100%">
     <thead>
     <tr>
-        <td>ID</td>
+    <td>ID</td>
         <td>Nom</td>
         <td>description</td>
-       
     </tr>
     </thead>
-    @foreach($categoriesas $c)
+    @foreach($categories as $c)
         <tbody>
         <tr>
             <td>{{ $c->id }}</td>
             <td>{{ $c->nom }}</td>
-            <td>{{ $c->description}}</td>
+            <td>{{ $c->descripyion}}</td>
            
         </tr>
         </tbody>
     @endforeach
 
 </table>
-
 
 
 
