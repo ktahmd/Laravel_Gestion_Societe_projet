@@ -6,6 +6,7 @@ use App\Exports\Exportcategories;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\RedirectResponse;
+
 use Excel;
 use PDF;
 
@@ -151,5 +152,6 @@ class Categoriescontroller extends Controller
     {
         return (new Exportcategories)->download('categories.xlsx'); 
     }
+
 }
 

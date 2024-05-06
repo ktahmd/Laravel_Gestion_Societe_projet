@@ -3,26 +3,25 @@
 @section('content')
     <div class="box box-success">
         <div class="box-header">
-            <h3 class="box-title">List of clients</h3>
+            <h3 class="box-title">List of commandes</h3>
         </div>
 
         <div class="box-header">
-            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add client</a>
-            <a href="{{ route('exportPDF.clientAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
-            <a href="{{ route('exportExcel.clientAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
+            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add commands</a>
+            <a href="{{ route('exportPDF.facturesAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
+            <a href="{{ route('exportExcel.facturesAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
         </div>
 
         <!-- /.box-header -->
         <div class="box-body">  
-            <table id="client-table" class="table table-bordered table-hover table-striped">
+            <table id="factures-table" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>id</th>
-                    <th>Nom</th>
-                    <th>Description</th>
-                    <th>Prix</th>
-                    <th>quantite_stock</th>
-                    <th>categorie_id</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Contact</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -56,11 +55,11 @@
                             <input type="text" class="form-control" id="adresse" name="adresse" required/>
                         </div>
                         <div class="form-group">
-                            <label for="email" class="control-label">Email:</label>
+                            <label for="email" class="control-label">produit</label>
                             <input type="email" class="form-control" id="email" name="email" required/>
                         </div>
                         <div class="form-group">
-                            <label for="categories" class="control-label">Catogories:</label>
+                            <label for="telephone" class="control-label">Categories:</label>
                             {!! Form::select('categories_id', App\Models\Categories::pluck('nom', 'id'), null, ['class' => 'form-control select', 'placeholder' => '-- Choose category --', 'id' => 'categories_id', 'required']) !!}
                         </div>
                         <div class="modal-footer">
@@ -84,17 +83,16 @@
     <script src="{{ asset('assets/validator/validator.min.js') }}"></script>
 
     <script type="text/javascript">
-        var table = $('#client-table').DataTable({
+        var table = $('#factures-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('api.client') }}",
+            ajax: "{{ route('api.factures') }}",
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'nom', name: 'nom'},
-                {data: 'Description', name: 'Description'},
-                {data: 'categorie_id', name: 'categorie_id'},
-                {data: 'Prix', name: 'Prix'},
-                {data: 'quantite_stock', name: 'quantite_stock'},
+                {data: 'adresse', name: 'adresse'},
+                {data: 'email', name: 'email'},
+                {data: 'telephone', name: 'telephone'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -103,7 +101,7 @@
             save_method = "add";
             $('input[name=_method]').val('POST');
             $('#modal-form').modal('show');
-            $('.modal-title').text('Add client');
+            $('.modal-title').text('Add factures');
             $('#form-item')[0].reset();
             $('#id').val('');
         }
@@ -112,20 +110,17 @@
     $('input[name=_method]').val('PATCH');
     $('#modal-form form')[0].reset();
     $.ajax({
-        url: "{{ url('client') }}" + '/' + id + "/edit",
+        url: "{{ url('factures') }}" + '/' + id + "/edit",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
             $('#modal-form').modal('show');
-            $('.modal-title').text('Edit client');
+            $('.modal-title').text('Edit factures');
             $('#id').val(data.id); 
             $('#nom').val(data.nom); 
-            $('#Description').val(data.Description);  
-            $('#categorie_id').val(data.categorie_id);
-            $('#Prix').val(data.Prix);
-            $('#quantite_stock').val(data.quantite_stock);
-            $('#Prix').val(data.Prix);
-            {data: 'action', name: 'action', orderable: false, searchable: false}
+            $('#adresse').val(data.adresse);  
+            $('#email').val(data.email);
+            $('#telephone').val(data.telephone);
         },
         error : function() {
             alert("Nothing Data");
@@ -145,7 +140,7 @@
         confirmButtonText: 'Yes, delete it!'
     }).then(function () {
         $.ajax({
-            url : "{{ url('client') }}" + '/' + id,
+            url : "{{ url('factures') }}" + '/' + id,
             type : "POST",
             data : {'_method' : 'DELETE', '_token' : csrf_token},
             success : function(data) {
@@ -173,9 +168,9 @@ $(function(){
     $('#modal-form form').validator().on('submit', function (e) {
         e.preventDefault(); // Prevent default form submission
         var id = $('#id').val();
-        var url = "{{ url('client') }}";
+        var url = "{{ url('factures') }}";
         if (save_method == 'edit') {
-            url = "{{ url('client') }}" + '/' + id + "/update";
+            url = "{{ url('factures') }}" + '/' + id + "/update";
         }
 
         // Retrieve CSRF token value from meta tag

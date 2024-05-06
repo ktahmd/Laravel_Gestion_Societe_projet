@@ -41,8 +41,8 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3>{{ 34 }}</h3>
-                <p>Product</p>
+                <h3>{{ \App\models\produit::count() }}</h3>
+                <p>produit</p>
             </div>
             <div class="icon">
                 <i class="fa fa-cubes"></i>
@@ -79,14 +79,14 @@
         <!-- small box -->
         <div class="small-box bg-maroon">
             <div class="inner">
-                <h3>{{ 123 }}</h3>
+                <h3>{{ \App\models\factures::count() }}</h3>
 
-                <p>produit</p>
+                <p>commandes</p>
             </div>
             <div class="icon">
                 <i class="fa fa-cart-plus"></i>
             </div>
-            <a href="{{ route('Produit.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('factures.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->

@@ -6,6 +6,7 @@ use App\Exports\Exportfactures;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\RedirectResponse;
+use Collective\Html\FormFacade as Form;
 use Excel;
 use PDF;
 
@@ -25,6 +26,7 @@ class facturesController extends Controller
         $factures = factures::all();
         return view('factures.index');
     }
+    
 
     /**
      * Show the form for creating a new resource.
