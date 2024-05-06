@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('commandes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id')->unsigned();
+            $table->integer('produit_id')->unsigned();
             $table->date('date_commande');
+            $table->integer('qty');
             $table->timestamps();
-
+            
+            $table->foreign('produit_id')->references('id')->on('produit')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('client')->onDelete('cascade');
         });
-
     }
 
     /**
