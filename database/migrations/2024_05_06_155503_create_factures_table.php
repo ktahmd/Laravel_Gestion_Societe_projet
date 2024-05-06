@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('produit_id')->unsigned();
             $table->integer('commandes_id')->unsigned();
             $table->integer('qty');
-            $table->integer('qtjjjy');
             $table->integer('client_id')->unsigned();
 
             $table->timestamps();
