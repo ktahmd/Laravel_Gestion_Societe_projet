@@ -3,25 +3,23 @@
 @section('content')
     <div class="box box-success">
         <div class="box-header">
-            <h3 class="box-title">List of clients</h3>
+            <h3 class="box-title">List of categoriess</h3>
         </div>
 
         <div class="box-header">
-            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add client</a>
-            <a href="{{ route('exportPDF.clientAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
-            <a href="{{ route('exportExcel.clientAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
+            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add categories</a>
+            <a href="{{ route('exportPDF.categoriesAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
+            <a href="{{ route('exportExcel.categoriesAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
         </div>
 
         <!-- /.box-header -->
         <div class="box-body">  
-            <table id="client-table" class="table table-bordered table-hover table-striped">
+            <table id="categories-table" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Contact</th>
+                    <th>Nom</th>
+                    <th>description</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -51,17 +49,10 @@
                             <input type="text" class="form-control" id="nom" name="nom" autofocus required/>
                         </div>
                         <div class="form-group">
-                            <label for="adresse" class="control-label">Address:</label>
-                            <input type="text" class="form-control" id="adresse" name="adresse" required/>
+                            <label for="description" class="control-label">description:</label>
+                            <input type="text" class="form-control" id="description" name="adresse" />
                         </div>
-                        <div class="form-group">
-                            <label for="email" class="control-label">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="telephone" class="control-label">Contact:</label>
-                            <input type="text" class="form-control" id="telephone" name="telephone" required/>
-                        </div>
+                       
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
@@ -83,16 +74,15 @@
     <script src="{{ asset('assets/validator/validator.min.js') }}"></script>
 
     <script type="text/javascript">
-        var table = $('#client-table').DataTable({
+        var table = $('#categories-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('api.client') }}",
+            ajax: "{{ route('api.categories') }}",
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'nom', name: 'nom'},
-                {data: 'adresse', name: 'adresse'},
-                {data: 'email', name: 'email'},
-                {data: 'telephone', name: 'telephone'},
+                {data: 'description', name: 'description'},
+              
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -101,7 +91,7 @@
             save_method = "add";
             $('input[name=_method]').val('POST');
             $('#modal-form').modal('show');
-            $('.modal-title').text('Add client');
+            $('.modal-title').text('Add categories');
             $('#form-item')[0].reset();
             $('#id').val('');
         }
@@ -110,17 +100,16 @@
     $('input[name=_method]').val('PATCH');
     $('#modal-form form')[0].reset();
     $.ajax({
-        url: "{{ url('client') }}" + '/' + id + "/edit",
+        url: "{{ url('categories') }}" + '/' + id + "/edit",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
             $('#modal-form').modal('show');
-            $('.modal-title').text('Edit client');
+            $('.modal-title').text('Edit categories');
             $('#id').val(data.id); 
             $('#nom').val(data.nom); 
-            $('#adresse').val(data.adresse);  
-            $('#email').val(data.email);
-            $('#telephone').val(data.telephone);
+            $('#description').val(data.description);  
+            
         },
         error : function() {
             alert("Nothing Data");
@@ -140,7 +129,7 @@
         confirmButtonText: 'Yes, delete it!'
     }).then(function () {
         $.ajax({
-            url : "{{ url('client') }}" + '/' + id,
+            url : "{{ url('categories') }}" + '/' + id,
             type : "POST",
             data : {'_method' : 'DELETE', '_token' : csrf_token},
             success : function(data) {
@@ -168,9 +157,9 @@ $(function(){
     $('#modal-form form').validator().on('submit', function (e) {
         e.preventDefault(); // Prevent default form submission
         var id = $('#id').val();
-        var url = "{{ url('client') }}";
+        var url = "{{ url('categories') }}";
         if (save_method == 'edit') {
-            url = "{{ url('client') }}" + '/' + id + "/update";
+            url = "{{ url('categories') }}" + '/' + id + "/update";
         }
 
         // Retrieve CSRF token value from meta tag
