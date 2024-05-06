@@ -11,11 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commandes', function (Blueprint $table) {
+        Schema::create('factures', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('commandes_id')->unsigned();
             $table->integer('client_id')->unsigned();
-            $table->integer('qty');
+            $table->integer('produit_id')->unsigned();
+            
             $table->timestamps();
+            
+            $table->foreign('produit_id')->references('id')->on('produit')->onDelete('cascade');
+            $table->foreign('produit_id')->references('id')->on('produit')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('client')->onDelete('cascade');
         });
     }
@@ -25,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('commandes');
+        Schema::dropIfExists('factures');
     }
 };

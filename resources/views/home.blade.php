@@ -26,7 +26,7 @@
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>{{ 234 }}<sup style="font-size: 20px"></sup></h3>
+                <h3>{{ \App\models\categories::count() }}<sup style="font-size: 20px"></sup></h3>
 
                 <p>Category</p>
             </div>
@@ -55,7 +55,7 @@
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>{{ 34 }}</h3>
+                <h3>{{\App\models\client::count() }}</h3>
 
             <p>client</p>
             </div>
@@ -73,21 +73,7 @@
 
 <div class="row">
     
-    <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-purple">
-            <div class="inner">
-                <h3>{{ 123 }}<sup style="font-size: 20px"></sup></h3>
-
-                <p>Supplier</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-signal"></i>
-            </div>
-            {{-- <a href="{{ route('suppliers.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
-        </div>
-    </div>
+    
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
@@ -95,30 +81,30 @@
             <div class="inner">
                 <h3>{{ 123 }}</h3>
 
-                <p>Total Purchase</p>
+                <p>produit</p>
             </div>
             <div class="icon">
                 <i class="fa fa-cart-plus"></i>
             </div>
-            {{-- <a href="{{ route('productsIn.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+            <a href="{{ route('Produit.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
+    {{-- <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-primary">
+        <div class="small-box bg-purple">
             <div class="inner">
-                <h3>{{ 123  }}</h3>
+                <h3>{{ \App\models\commandes::count() }}<sup style="font-size: 20px"></sup></h3>
 
-                <p>Total Outgoing</p>
+                <p>ajouter </p>
             </div>
             <div class="icon">
-                <i class="fa fa-minus"></i>
+                <i class="fa fa-signal"></i>
             </div>
-            {{-- <a href="{{ route('productsOut.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+            <a href="{{ route('suppliers.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
-    </div>
-    <!-- ./col -->
+    </div> --}}
+    
     <div id="container" class=" col-xs-6"></div>
 </div><!-- Log on to codeastro.com for more projects! -->
 
