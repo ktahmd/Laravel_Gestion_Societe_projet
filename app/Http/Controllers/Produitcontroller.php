@@ -127,17 +127,25 @@ class Produitcontroller extends Controller
         ]);
     }
     
-    public function apiProduit()
-    {
-        $Produit = Produit::all();
+
+
+public function apiProduit()
+{
+    $Produit = Produit::with('categorie')->get(); 
     
-        return Datatables::of($Produit)
-            ->addColumn('action', function($Produit){
-                return '<a onclick="editForm('. $Produit->id .')" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i> Edit</a> ' .
-                    '<a onclick="deleteData('. $Produit->id .')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-            })
-            ->rawColumns(['action'])->make(true);
-    }
+    return Datatables::of($Produit)
+        ->addColumn('categorie_nom', function($Produit) {
+            return $Produit->categorie->nom ; 
+        })
+        
+        ->addColumn('action', function($Produit) {
+            return '<a onclick="editForm('. $Produit->id .')" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i> Edit</a> ' .
+                '<a onclick="deleteData('. $Produit->id .')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+}
+
     
     
     

@@ -50,7 +50,7 @@ class Categoriescontroller extends Controller
     
     // Validate the request data
     $this->validate($request, [
-        'nom' => 'required',
+        'nom' => 'required|unique:categories,nom,' . $request->id,
         'description' => 'required'
     ]);
 
