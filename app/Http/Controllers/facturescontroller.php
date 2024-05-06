@@ -49,6 +49,7 @@ class facturesController extends Controller
         
         $this->validate($request, [
             
+            
         ]);
 
         factures::create($request->all());
@@ -95,6 +96,8 @@ class facturesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'qty' => 'required|integer',
+            'prix_total' => 'required|numeric',
            
         ]);
 
