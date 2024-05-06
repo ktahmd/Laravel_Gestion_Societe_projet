@@ -17,7 +17,6 @@
             <table id="produit-table" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>id</th>
                     <th>Nom</th>
                     <th>Description</th>
                     <th>Prix</th>
@@ -93,7 +92,6 @@
             serverSide: true,
             ajax: "{{ route('api.Produit') }}",
             columns: [
-                {data: 'id', name: 'id'},
                 {data: 'nom', name: 'nom'},
                 {data: 'description', name: 'description'},
                 {data: 'prix', name: 'prix'},
@@ -135,7 +133,6 @@
         success: function(data) {
             $('#modal-form').modal('show');
             $('.modal-title').text('Edit produit');
-            $('#id').val(data.id); 
             $('#nom').val(data.nom); 
             $('#description').val(data.description); 
             $('#categories_id').val(data.categorie_id);  

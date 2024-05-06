@@ -91,11 +91,7 @@
             serverSide: true,
             ajax: "{{ route('api.commandes') }}",
             columns: [
-                {data: 'id', name: 'id'},
-                {data: 'Date_command', name: 'Date_command'},
                 {data: 'Client_id', name: 'Client_id'},
-                {data: 'Produit_id', name: 'Produit_id'},
-                {data: 'qty', name: 'qty'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -118,12 +114,9 @@
         dataType: "JSON",
         success: function(data) {
             $('#modal-form').modal('show');
-            $('.modal-title').text('Edit commandes');
-            $('#id').val(data.id); 
-            $('#Date_command').val(data.Date_command); 
+            $('.modal-title').text('Edit Commandes');
             $('#client_id').val(data.client_id);  
-            $('#Produit_id').val(data.Produit_id);
-            $('#qty').val(data.qty);
+           
         },
         error : function() {
             alert("Nothing Data");

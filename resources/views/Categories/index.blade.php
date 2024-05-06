@@ -17,7 +17,6 @@
             <table id="categories-table" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nom</th>
                     <th>description</th>
                     <th>Actions</th>
@@ -79,7 +78,6 @@
             serverSide: true,
             ajax: "{{ route('api.categories') }}",
             columns: [
-                {data: 'id', name: 'id'},
                 {data: 'nom', name: 'nom'},
                 {data: 'description', name: 'description'},
               

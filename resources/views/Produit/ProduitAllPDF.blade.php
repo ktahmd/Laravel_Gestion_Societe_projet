@@ -30,7 +30,8 @@
         <td>Nom</td>
         <td>Description</td>
         <td>Prix</td>
-        <td>
+        <td>categorie_id</td>
+        <td>quantite_stock</td>
     </tr>
     </thead>
     @foreach($produit as $c)
@@ -39,7 +40,8 @@
             <td>{{ $c->id }}</td>
             <td>{{ $c->nom }}</td>
             <td>{{ $c->descripyion}}</td>
-           
+            <td>{{ $c->categorie_id }}</td>
+            <td>{{ $c-> quantite_stock}}</td>  
         </tr>
         </tbody>
     @endforeach

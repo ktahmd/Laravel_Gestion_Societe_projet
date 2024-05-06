@@ -28,20 +28,13 @@
     <thead>
     <tr>
     <td>ID</td>
-        <td>date_commande</td>
         <td>client_id</td>
-        <td>produit_id </td>
-        <td>qty </td>
     </tr>
     </thead>
     @foreach($commandes as $c)
         <tbody>
         <tr>
-        <td>ID</td>
-        <td>date_commande</td>
         <td>client_id</td>
-        <td>produit_id </td>
-        <td>qty </td>
         </tr>
         </tbody>
     @endforeach
