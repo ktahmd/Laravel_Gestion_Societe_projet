@@ -21,7 +21,7 @@ class commandes extends Model
      */
     protected $fillable = [
         'client_id',
-        'date_commande',
+        
 
     ];
 }

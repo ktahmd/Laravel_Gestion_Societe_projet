@@ -8,4 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class factures extends Model
 {
     use HasFactory;
+        /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'factures';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'client_id',
+        'produit_id',
+        'commandes_id',
+        'qty',
+        'prix_total',
+
+        
+        
+
+    ];
 }

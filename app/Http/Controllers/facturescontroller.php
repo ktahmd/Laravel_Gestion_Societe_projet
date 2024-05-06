@@ -46,10 +46,7 @@ class facturesController extends Controller
     {
         
         $this->validate($request, [
-            'nom'      => 'required|string|min:2',
-            'adresse'    => 'required|string|max:50',
-            'email'     => 'required|string|email|max:50|unique:factures',
-            'telephone'   => 'required|string|max:20',
+            
         ]);
 
         factures::create($request->all());
@@ -96,10 +93,7 @@ class facturesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-           'nom'      => 'required|string|min:2',
-            'adresse'    => 'required|string|max:50',
-            'email'     => 'required|string|email|max:50|unique:factures,email,' . $request->id,
-            'telephone'   => 'required|string|max:20',
+           
         ]);
 
         $factures = factures::findOrFail($id);
