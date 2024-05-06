@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('commandes', function (Blueprint $table) {
-            $table->id();
-            $table->string('client_id');
+            $table->increments('id');
+            $table->integer('client_id')->unsigned();
             $table->date('date_commande');
             $table->timestamps();
 
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('client')->onDelete('cascade');
         });
 
     }
