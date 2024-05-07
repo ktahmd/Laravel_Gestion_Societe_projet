@@ -41,7 +41,7 @@
             <td>{{ $c->nom }}</td>
             <td>{{ $c->descripyion}}</td>
             <td>{{ $c->categorie_id }}</td>
-            <td>{{ $c-> quantite_stock}}</td>  
+            <td>{{ $c->quantite_stock}}</td>  
         </tr>
         </tbody>
     @endforeach

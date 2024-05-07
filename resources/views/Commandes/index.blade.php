@@ -18,10 +18,8 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Client</th>
                     <th>Date_commande</th>
-                    <th>Client_id</th>
-                    <th>Produit_id</th>
-                    <th>qty</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -47,24 +45,14 @@
                         
                         <input type="hidden" id="id" name="id">
                         <div class="form-group">
-                            <label for="client_id" class="control-label">Name:</label>
-                            <input type="text" class="form-control" id="client_id" name="client_id" />
+                            <label for="client_id" class="control-label">Client a commande :</label>
+                            {!! Form::select('client_id', App\Models\client::pluck('nom', 'id'), null, ['class' => 'form-control select', 'placeholder' => '-- Choose client --', 'id' => 'client_id', 'required']) !!}
+                            <span class="help-block with-errors"></san>
                         </div>
-                        <div class="form-group">
-                            <label for="adresse" class="control-label">Address:</label>
-                            {!! Form::select('client_id', $client, null, ['class' => 'form-control select', 'placeholder' => '-- Choose Product --', 'id' => 'client_id', 'required']) !!}
-                            <span class="help-block with-errors"></span>
-                        </div>
+                        
 
           
-                        <div class="form-group">
-                            <label for="email" class="control-label">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="telephone" class="control-label">Contact:</label>
-                            <input type="text" class="form-control" id="telephone" name="telephone" required/>
-                        </div>
+                        
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
@@ -91,7 +79,9 @@
             serverSide: true,
             ajax: "{{ route('api.commandes') }}",
             columns: [
+                {data: 'id', name: 'id'},
                 {data: 'Client_id', name: 'Client_id'},
+                {data: 'created_at', name: 'created_at'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

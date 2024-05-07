@@ -1,36 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="box box-success">
-        <div class="box-header">
-            <h3 class="box-title">List of commandes</h3>
-        </div>
 
-        <div class="box-header">
-            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add commands</a>
-            <a href="{{ route('exportPDF.facturesAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
-            <a href="{{ route('exportExcel.facturesAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
-        </div>
 
-        <!-- /.box-header -->
-        <div class="box-body">  
-            <table id="factures-table" class="table table-bordered table-hover table-striped">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>client</th>
-                    <th>produit</th>
-                    <th>quantite</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-        <!-- /.box-body -->
-    </div>
-
-    <!-- Modal -->
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -67,6 +39,8 @@
             </div>
         </div>
     </div>
+
+
 @endsection
 
 @section('bot')
@@ -78,49 +52,54 @@
     <script src="{{ asset('assets/validator/validator.min.js') }}"></script>
 
     <script type="text/javascript">
-        var table = $('#factures-table').DataTable({
+        var table = $('#commander-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('api.factures') }}",
+            
             columns: [
-                {data: 'id', name: 'id'},
                 {data: 'nom', name: 'nom'},
-                {data: 'adresse', name: 'adresse'},
-                {data: 'email', name: 'email'},
-                {data: 'telephone', name: 'telephone'},
-                {data: 'action', name: 'action', orderable: false, searchable: false}
+                {data: 'description', name: 'description'},
+                {data: 'prix', name: 'prix'},
+                {data: 'quantite_stock', name: 'quantite_stock'},
+                {data: 'categorie_nom', name: 'categorie_nom'}, // Changed 'orderable' to true for sorting
+                
             ]
         });
+    
 
         function addForm() {
-            save_method = "add";
-            $('input[name=_method]').val('POST');
-            $('#modal-form').modal('show');
-            $('.modal-title').text('Add factures');
-            $('#form-item')[0].reset();
-            $('#id').val('');
-        }
-    function editForm(id) {
+    save_method = "add";
+    $('input[name=_method]').val('POST');
+    $('#modal-form').modal('show');
+    $('.modal-title').text('Add commander');
+    $('#form-item')[0].reset();
+    $('#id').val('');
+    
+    
+}
+
+        function editForm(id) {
     save_method = 'edit';
     $('input[name=_method]').val('PATCH');
     $('#modal-form form')[0].reset();
     $.ajax({
-        url: "{{ url('factures') }}" + '/' + id + "/edit",
+        url: "{{ url('commander') }}" + '/' + id + "/edit",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
             $('#modal-form').modal('show');
-            $('.modal-title').text('Edit factures');
-            $('#id').val(data.id); 
+            $('.modal-title').text('Edit commander');
             $('#nom').val(data.nom); 
-            $('#adresse').val(data.adresse);  
-            $('#email').val(data.email);
-            $('#telephone').val(data.telephone);
+            $('#description').val(data.description); 
+            $('#categories_id').val(data.categorie_id);  
+            $('#prix').val(data.prix);  
+            $('#quantite_stock').val(data.quantite_stock);
         },
         error : function() {
             alert("Nothing Data");
         }
     });
+
 }
 
     function deleteData(id){
@@ -135,7 +114,7 @@
         confirmButtonText: 'Yes, delete it!'
     }).then(function () {
         $.ajax({
-            url : "{{ url('factures') }}" + '/' + id,
+            url : "{{ url('commander') }}" + '/' + id,
             type : "POST",
             data : {'_method' : 'DELETE', '_token' : csrf_token},
             success : function(data) {
@@ -163,9 +142,9 @@ $(function(){
     $('#modal-form form').validator().on('submit', function (e) {
         e.preventDefault(); // Prevent default form submission
         var id = $('#id').val();
-        var url = "{{ url('factures') }}";
+        var url = "{{ url('commander') }}";
         if (save_method == 'edit') {
-            url = "{{ url('factures') }}" + '/' + id + "/update";
+            url = "{{ url('commander') }}" + '/' + id + "/update";
         }
 
         // Retrieve CSRF token value from meta tag
@@ -203,5 +182,21 @@ $(function(){
 });
     </script>
         
-    </script>
+        $(document).ready(function() {
+            // Fonction pour ajouter un produit
+            $('#ajouterProduit').on('click', function() {
+                var produitHtml = `
+                    <div class="form-group">
+                        <label for="produit_id" class="control-label">Produit:</label>
+                        {!! Form::select('produit_id[]', App\Models\Produit::pluck('nom', 'id'), null, ['class' => 'form-control select', 'placeholder' => '-- Choose Produit --', 'required']) !!}
+                    </div>
+                    <div class="form-group">
+                        <label for="qty" class="control-label">Quantité:</label>
+                        <input type="text" class="form-control" name="qty[]" required/>
+                    </div>
+                `;
+                // Ajout du code HTML du produit à la fin du formulaire
+                $('#form-item').append(produitHtml);
+            });
+        });
 @endsection

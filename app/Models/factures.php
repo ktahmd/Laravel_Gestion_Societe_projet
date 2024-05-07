@@ -25,9 +25,17 @@ class factures extends Model
         'commandes_id',
         'qty',
         'prix_total',
-
-        
-        
-
     ];
+    public function client()
+    {
+        return $this->belongsTo(client::class, 'client_id');
+    }
+    public function produit()
+    {
+        return $this->belongsTo(produit::class, 'produit_id');
+    }
+    public function commandes()
+    {
+        return $this->belongsTo(commandes::class, 'commandes_id');
+    }
 }

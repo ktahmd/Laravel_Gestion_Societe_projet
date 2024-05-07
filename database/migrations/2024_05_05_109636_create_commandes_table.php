@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('prix_total');
             $table->integer('client_id')->unsigned();
-            $table->integer('qty');
+            
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('client')->onDelete('cascade');
         });

@@ -110,16 +110,7 @@
     $('#form-item')[0].reset();
     $('#id').val('');
     
-    // Reset the select dropdown to its default value
-    $('#categories_id').val('').trigger('change'); // Assuming you're using a library like Select2
     
-    // Optional: You can also reset the validation state of the form fields
-    $('#form-item').validator('destroy').validator();
-    
-    // Capture the value of categorie_id when the form is opened
-    var categorieId = $('#categories_id').val();
-    // Set the value of categorie_id field in the form
-    $('input[name=categorie_id]').val(categorieId);
 }
 
         function editForm(id) {

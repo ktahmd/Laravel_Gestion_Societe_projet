@@ -126,9 +126,12 @@ class Commandescontroller extends Controller
         $Commandes = Commandes::all();
 
         return Datatables::of($Commandes)
-            ->addColumn('action', function($Commandes){
-                return '<a onclick="editForm('. $Commandes->id .')" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i> Edit</a> ' .
+            ->addColumn('Ajouter des produits', function($Commandes){
+                return '<a onclick="openview('. $Commandes->id .')" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i> ajouter PR</a> ' .
                     '<a onclick="deleteData('. $Commandes->id .')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            })
+            ->addColumn('action', function($Commandes){
+                return '<a onclick="deleteData('. $Commandes->id .')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
             })
             ->rawColumns(['action'])->make(true);
     }

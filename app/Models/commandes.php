@@ -21,7 +21,13 @@ class commandes extends Model
      */
     protected $fillable = [
         'client_id',
+        'created_at',
+        'prix_total',
         
 
     ];
+    public function client()
+    {
+        return $this->belongsTo(client::class, 'client_id');
+    }
 }

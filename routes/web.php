@@ -88,5 +88,9 @@ Route::patch('factures/{id}/update', [facturesController::class, 'update']);
 Route::get('/exportfacturesAll', [facturesController::class, 'exportfacturesAll'])->name('exportPDF.facturesAll');
 Route::get('/exportfacturesAllExcel', [facturesController::class, 'exportExcel'])->name('exportExcel.facturesAll');
 
+Route::get('/commander', function () {
+    return view('commander');
+});
+
 
 require __DIR__.'/auth.php';
