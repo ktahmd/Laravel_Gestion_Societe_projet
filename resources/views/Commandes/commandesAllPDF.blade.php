@@ -1,21 +1,21 @@
 
 <style>
-    #categories {
+    #commandes {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         width: 100%;
     }
 
-    #categories td, #categories th {
+    #commandes td, #commandes th {
         border: 1px solid #ddd;
         padding: 8px;
     }
 
-    #categories tr:nth-child(even){background-color: #f2f2f2;}
+    #commandes tr:nth-child(even){background-color: #f2f2f2;}
 
-    #categories tr:hover {background-color: #ddd;}
+    #commandes tr:hover {background-color: #ddd;}
 
-    #categories th {
+    #commandes th {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
@@ -24,17 +24,22 @@
     }
 </style>
 
-<table id="categories" width="100%">
+<table id="commandes" width="100%">
     <thead>
     <tr>
-    <td>ID</td>
+        <td>ID</td>
         <td>client_id</td>
+        <td>date</td>
+        <td>prix total</td>
     </tr>
     </thead>
     @foreach($commandes as $c)
         <tbody>
         <tr>
-        <td>client_id</td>
+        <td>{{ $c->id}}</td> 
+        <td>{{ $c->client_id}}</td>
+        <td>{{ $c->created_at}}</td>
+        <td>{{ $c->prix_total}}</td>
         </tr>
         </tbody>
     @endforeach

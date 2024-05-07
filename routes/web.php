@@ -83,14 +83,16 @@ Route::get('/factures', [facturesController::class, 'index'])->name('factures.in
 Route::post('/factures', [facturesController::class, 'store'])->name('factures.store');
 Route::get('/apifactures', [facturesController::class, 'apifactures'])->name('api.factures');
 Route::delete('factures/{id}', [facturesController::class, 'destroy']);
+Route::get('factures/{id}/commandes', [facturesController::class, 'commande']);
 Route::get('factures/{id}/edit', [facturesController::class, 'edit']);
 Route::patch('factures/{id}/update', [facturesController::class, 'update']);
-Route::get('/exportfacturesAll', [facturesController::class, 'exportfacturesAll'])->name('exportPDF.facturesAll');
-Route::get('/exportfacturesAllExcel', [facturesController::class, 'exportExcel'])->name('exportExcel.facturesAll');
+Route::get('/exportfacturesAll/{CM_ID}', [facturesController::class, 'exportfacturesAll'])->name('exportPDF.facturesAll');
+Route::get('/exportfacturesAllExcel/{CM_ID}', [facturesController::class, 'exportExcel'])->name('exportExcel.facturesAll');
 
 Route::get('/commander', function () {
     return view('commander');
 });
+Route::get('/factures/{id}/commandes',  [facturesController::class, 'detailsCommandes']);
 
 
 require __DIR__.'/auth.php';

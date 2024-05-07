@@ -1,56 +1,57 @@
 
-<style>
-    #factures {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
+<table>
 
-    #factures td, #factures th {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-
-    #factures tr:nth-child(even){background-color: #f2f2f2;}
-
-    #factures tr:hover {background-color: #ddd;}
-
-    #factures th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #4CAF50;
-        color: white;
-    }
-</style>
-
-<table id="factures" width="100%">
-    <thead>
-    <tr>
-    <td>ID</td>
-        <td>client_id</td>
-        <td>produit_id</td>
-        <td>commandes_id</td>
-        <td>qty</td>
-        <td>prix_total</td>
-    </tr>
-    <td>{{ $c->id }}</td>
-            <td>{{ $c->client_id}}</td>
-            <td>{{ $c->produit_id }}</td>
-            <td>{{ $c->commandes_id }}</td>
-            <td>{{ $c->qty}}</td>
-            <td>{{ $c->prix_total}}</td>
-    </tr>
-    </thead>
-    @foreach($client as $c)
-        <tbody>
         <tr>
-           
-        </tr>
-        </tbody>
-    @endforeach
+            <th>Client : </th>
+            <th>{{ $client }}</th>
+        </tr>   
+        <tr>
+            <th>Date : </th>
+            <th>{{ $date }}</th>
+        </tr> 
+        <tr>
+            <th>Date : </th>
+            <th>{{ $date }}</th>
+        </tr> 
+        <tr>
+            <th>Référence :</th>
+            <th>{{ $commande->id }}</th>
+        </tr> 
+        
 
 </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>MONTANT</th>
+            </tr>
+        </thead>
+        <tbody>
+       
+             {{$s = 0;}}
+            @foreach($factures as $f)
+            <tr>
+                <td>{{ $f->produit->nom }}</td>
+                <td>{{ $f->qty }}</td>
+                <td>{{ $f->produit->prix }}</td>
+                <td>{{ $f->qty * $f->produit->prix }}</td>
+
+                 {{$s += $f->qty * $f->produit->prix; }}
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <table>
+        <tr>
+            <th>Total payé :  </th>
+            <th>{{ $s }}</th>
+            <th>MRU</th>
+        </tr>  
+    </table>
+
 
 
 

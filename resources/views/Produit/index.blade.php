@@ -124,11 +124,12 @@
         success: function(data) {
             $('#modal-form').modal('show');
             $('.modal-title').text('Edit produit');
+            $('#id').val(data.id); 
             $('#nom').val(data.nom); 
             $('#description').val(data.description); 
-            $('#categories_id').val(data.categorie_id);  
-            $('#prix').val(data.prix);  
+            $('#prix').val(data.prix);
             $('#quantite_stock').val(data.quantite_stock);
+            $('#categories_id').val(data.categories_id);    
         },
         error : function() {
             alert("Nothing Data");

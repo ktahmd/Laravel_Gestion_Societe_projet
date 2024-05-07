@@ -49,7 +49,10 @@ class Commandescontroller extends Controller
         $this->validate($request, [
         ]);
 
-        Commandes::create($request->all());
+        $commandes = new Commandes();
+        $commandes->client_id = $request->input('client_id');
+        $commandes->prix_total = 0;
+        $commandes->save();
 
         return response()->json([
             'success'    => true,
@@ -83,26 +86,10 @@ class Commandescontroller extends Controller
         return $Commandes;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            
-        ]);
-
-        $Commandes = Commandes::findOrFail($id);
-        $Commandes->update($request->all());
-
-        return response()->json([
-            'success'    => true,
-            'message'    => 'Commandes Updated'
-        ]);
+        
     }
 
     /**
@@ -123,15 +110,17 @@ class Commandescontroller extends Controller
 
     public function apiCommandes()
     {
-        $Commandes = Commandes::all();
-
-        return Datatables::of($Commandes)
-            ->addColumn('Ajouter des produits', function($Commandes){
-                return '<a onclick="openview('. $Commandes->id .')" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i> ajouter PR</a> ' .
-                    '<a onclick="deleteData('. $Commandes->id .')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-            })
+        
+        $Commandes = Commandes::with('client')->get(); 
+    
+    return Datatables::of($Commandes)
+        ->addColumn('client_nom', function($Commandes) {
+            return $Commandes->client->nom ; 
+        })
+            
             ->addColumn('action', function($Commandes){
-                return '<a onclick="deleteData('. $Commandes->id .')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                return '<a onclick="openview('. $Commandes->id .')" class="btn btn-primary btn-xs"><i class="glyphicon ""></i>detailles</a>
+                <a onclick="deleteData('. $Commandes->id .')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
             })
             ->rawColumns(['action'])->make(true);
     }
@@ -140,6 +129,7 @@ class Commandescontroller extends Controller
 
     public function exportCommandesAll()
     {
+        
         $Commandes = Commandes::all();
         $pdf = PDF::loadView('Commandes.CommandesAllPDF',compact('Commandes'));
         return $pdf->download('Commandes.pdf');

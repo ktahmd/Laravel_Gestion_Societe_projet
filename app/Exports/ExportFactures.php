@@ -18,6 +18,11 @@ class Exportfactures implements FromView
     public function view(): View
     {
         // TODO: Implement view() method.
+        $commandes = Commandes::findOrFail($CM_ID);
+        $client = $commandes->client->nom;
+        $factures = Factures::where('commandes_id', $CM_ID)->get();
+        $IDD=$CM_ID;
+        $date=$commandes->created_at;
         return view('factures.facturesAllExcel',[
             'factures' => factures::all()
         ]);

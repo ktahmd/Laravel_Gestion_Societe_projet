@@ -20,6 +20,7 @@
                     <th>ID</th>
                     <th>Client</th>
                     <th>Date_commande</th>
+                    <th>Prix Total</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -80,8 +81,13 @@
             ajax: "{{ route('api.commandes') }}",
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'Client_id', name: 'Client_id'},
-                {data: 'created_at', name: 'created_at'},
+                {data: 'client_nom', name: 'client_nom'},
+                {data: 'created_at', name: 'created_at',
+                render: function(data, type, full, meta) {
+                        return new Date(data).toISOString().split('T')[0];
+                    }
+                },
+                {data: 'prix_total', name: 'prix_total'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -94,25 +100,11 @@
             $('#form-item')[0].reset();
             $('#id').val('');
         }
-    function editForm(id) {
-    save_method = 'edit';
-    $('input[name=_method]').val('PATCH');
-    $('#modal-form form')[0].reset();
-    $.ajax({
-        url: "{{ url('commandes') }}" + '/' + id + "/edit",
-        type: "GET",
-        dataType: "JSON",
-        success: function(data) {
-            $('#modal-form').modal('show');
-            $('.modal-title').text('Edit Commandes');
-            $('#client_id').val(data.client_id);  
-           
-        },
-        error : function() {
-            alert("Nothing Data");
-        }
-    });
-}
+    function openview(id) {
+    save_method = 'open';
+    url = "{{ url('factures') }}" + '/' + id +'/commandes';
+    window.open(url, '_blank');
+   }
 
     function deleteData(id){
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
@@ -155,10 +147,6 @@ $(function(){
         e.preventDefault(); // Prevent default form submission
         var id = $('#id').val();
         var url = "{{ url('commandes') }}";
-        if (save_method == 'edit') {
-            url = "{{ url('commandes') }}" + '/' + id + "/update";
-        }
-
         // Retrieve CSRF token value from meta tag
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
 

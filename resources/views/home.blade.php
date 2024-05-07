@@ -86,7 +86,7 @@
             <div class="icon">
                 <i class="fa fa-cart-plus"></i>
             </div>
-            <a href="{{ route('factures.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('commandes.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->

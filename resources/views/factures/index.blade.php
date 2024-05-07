@@ -11,26 +11,33 @@
             <a href="{{ route('exportPDF.facturesAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
             <a href="{{ route('exportExcel.facturesAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
         </div>
-
+        <div class="box-body">
+        <h3 class="box-title"><b>FACTIMA COMMANDES</b></h3>
+        </div>
         <!-- /.box-header -->
         <div class="box-body">  
             <table id="factures-table" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>client</th>
                     <th>produit</th>
                     <th>quantite</th>
+                    <th>Prix unitaire</th>
+                    <th>Prix Total</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
+        <div class="box-body">
+            <h3><b>Total payé : <span id="totalPaye">0</span> MRU</b></h3>
+        </div>
         <!-- /.box-body -->
     </div>
+    
 
     <!-- Modal -->
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -83,13 +90,21 @@
             serverSide: true,
             ajax: "{{ route('api.factures') }}",
             columns: [
-                {data: 'id', name: 'id'},
-                {data: 'nom', name: 'nom'},
-                {data: 'adresse', name: 'adresse'},
-                {data: 'email', name: 'email'},
-                {data: 'telephone', name: 'telephone'},
+                {data: 'produit_nom', name: 'produit_nom'},
+                {data: 'qty', name: 'qty'},
+                {data: 'prix_u', name: 'prix_u'},
+                {data: 'TOTO', name: 'TOTO'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+        
+        var totalPaye = 0;
+        table.on('draw', function () {
+            totalPaye = 0;
+            table.rows().every(function () {
+                totalPaye += parseFloat(this.data().TOTO);
+            });
+            $('#totalPaye').text(totalPaye.toFixed(2));
         });
 
         function addForm() {
