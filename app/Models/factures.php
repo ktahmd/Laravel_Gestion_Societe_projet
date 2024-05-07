@@ -24,7 +24,7 @@ class factures extends Model
         'produit_id',
         'commandes_id',
         'qty',
-        'prix_total',
+        
     ];
     public function client()
     {
