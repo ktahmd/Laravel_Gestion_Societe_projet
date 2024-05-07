@@ -37,9 +37,9 @@
     @foreach($Produit as $c)
         <tbody>
         <tr>
-            <td>{{ $c->id }}</td>
             <td>{{ $c->nom }}</td>
             <td>{{ $c->descripyion}}</td>
+            <td>{{ $c-> Prix}}</td>
             <td>{{ $c->categorie_id }}</td>
             <td>{{ $c->quantite_stock}}</td>  
         </tr>
