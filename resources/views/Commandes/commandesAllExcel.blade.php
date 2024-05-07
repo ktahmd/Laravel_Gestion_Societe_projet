@@ -27,21 +27,16 @@
 <table id="categories" width="100%">
     <thead>
     <tr>
-        <td>ID</td>
-        <td>date_commande</td>
+       
         <td>client_id</td>
-        <td>produit_id </td>
-        <td>qty </td>
+        
     </tr>
     </thead>
     @foreach($commandes as $c)
         <tbody>
         <tr>
-            <td>{{ $c->id }}</td>
-            <td>{{ $c->date_commande}}</td>
+           
             <td>{{ $c->client_id}}</td>
-            <td>{{ $c->produit_id}}</td>
-            <td>{{ $c->qty}}</td>
 
         </tr>
         </tbody>

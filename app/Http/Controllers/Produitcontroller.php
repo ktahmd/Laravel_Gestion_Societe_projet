@@ -48,7 +48,7 @@ class Produitcontroller extends Controller
         
         $this->validate($request, [
             'nom' => 'required|string|min:2',
-            'description' => 'nullable|string|max:50', // 'description' peut être nullable
+            'description' => 'required|string|max:50', 
             'prix' => 'required|numeric',
             'quantite_stock' => 'required|integer'
         ]);
@@ -98,7 +98,7 @@ class Produitcontroller extends Controller
     {
         $this->validate($request, [
                 'nom' => 'required|string|min:2',
-                'description' => 'nullable|string|max:50', // 'description' peut être nullable
+                'description' => 'required|string|max:50', 
                 'prix' => 'required|numeric',
                 'quantite_stock' => 'required|integer'
             
