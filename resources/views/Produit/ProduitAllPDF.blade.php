@@ -39,7 +39,7 @@
         <tr>
             <td>{{ $c->nom }}</td>
             <td>{{ $c->descripyion}}</td>
-            <td>{{ $c-> Prix}}</td>
+            <td>{{ $c->prix}}</td>
             <td>{{ $c->categorie_id }}</td>
             <td>{{ $c->quantite_stock}}</td>  
         </tr>

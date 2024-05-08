@@ -179,15 +179,13 @@ class facturesController extends Controller
 
 public function exportExcel($CM_ID)
 {
-    // Récupérer la commande et les informations nécessaires
     $commande = Commandes::findOrFail($CM_ID);
     $client = $commande->client->nom;
     $factures = Factures::where('commandes_id', $CM_ID)->get();
     $date = $commande->created_at;
 
-    // Générer et télécharger le fichier Excel
     return Excel::download(function () use ($factures, $client, $date) {
-        // Retourner la vue factures.facturesAllExcel avec les données nécessaires
+        
         return view('factures.facturesAllExcel', compact('factures', 'client', 'date'));
     }, 'factures.xlsx');
 }

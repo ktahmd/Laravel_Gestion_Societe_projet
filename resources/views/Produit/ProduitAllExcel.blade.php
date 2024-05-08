@@ -40,9 +40,9 @@
         <tr>
             <td>{{ $c->nom }}</td>
             <td>{{ $c->description}}</td>
-            <td>{{ $c-> prix}}</td>
+            <td>{{ $c->prix}}</td>
             <td>{{ $c->categorie_id }}</td>
-            <td>{{ $c-> quantite_stock}}</td>  
+            <td>{{ $c->quantite_stock}}</td>  
         </tr>
         </tbody>
     @endforeach
