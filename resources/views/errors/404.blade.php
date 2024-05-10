@@ -6,7 +6,7 @@
     <title>404 - Page Not Found</title>
     <style>
         body {
-            background-color: #58b85c; /* Green background */
+            background-color: #252c35; /* Green background */
             display: flex;
             justify-content: center;
             align-items: center;

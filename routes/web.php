@@ -65,8 +65,6 @@ Route::get('/apicommandes', [commandesController::class, 'apicommandes'])->name(
 Route::delete('commandes/{id}', [commandesController::class, 'destroy']);
 Route::get('commandes/{id}/edit', [commandesController::class, 'edit']);
 Route::patch('commandes/{id}/update', [commandesController::class, 'update']);
-Route::get('/exportcommandesAll', [commandesController::class, 'exportcommandesAll'])->name('exportPDF.commandesAll');
-Route::get('/exportcommandesAllExcel', [commandesController::class, 'exportExcel'])->name('exportExcel.commandesAll');
 
 
 Route::get('/Produit', [ProduitController::class, 'index'])->name('Produit.index');
@@ -81,18 +79,16 @@ Route::get('/exportProduitAllExcel', [ProduitController::class, 'exportExcel'])-
 
 Route::get('/factures', [facturesController::class, 'index'])->name('factures.index');
 Route::post('/factures', [facturesController::class, 'store'])->name('factures.store');
-Route::get('/apifactures', [facturesController::class, 'apifactures'])->name('api.factures');
+Route::get('/apifactures/{id}', [facturesController::class, 'apifactures'])->name('api.factures');
 Route::delete('factures/{id}', [facturesController::class, 'destroy']);
-Route::get('factures/{id}/commandes', [facturesController::class, 'commande']);
 Route::get('factures/{id}/edit', [facturesController::class, 'edit']);
 Route::patch('factures/{id}/update', [facturesController::class, 'update']);
-Route::get('/exportfacturesAll/{CM_ID}', [facturesController::class, 'exportfacturesAll'])->name('exportPDF.facturesAll');
-Route::get('/exportfacturesAllExcel/{CM_ID}', [facturesController::class, 'exportExcel'])->name('exportExcel.facturesAll');
+Route::get('/exportfacturesAll/{id}', [facturesController::class, 'exportfacturesAll'])->name('exportPDF.facturesAll');
+Route::get('/exportfacturesAllExcel/{id}', [facturesController::class, 'exportExcel'])->name('exportExcel.facturesAll');
 
-Route::get('/commander', function () {
-    return view('commander');
-});
+
 Route::get('/factures/{id}/commandes',  [facturesController::class, 'detailsCommandes']);
+// Route::post('commandes/{id}/updatetoto', [commandesController::class, 'updatetoto'])->name('commandes.updateToto');
 
 
 require __DIR__.'/auth.php';

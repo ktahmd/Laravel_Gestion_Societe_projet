@@ -16,7 +16,7 @@
                 <p>Utilisateur</p>
             </div>
             <div class="icon">
-                <i class="fa fa-user-secret"></i>
+                <img src="{{ asset('usericon.png')}}" alt="usericon" width="60px">
             </div>
             <a href="/user" class="small-box-footer">Plus d'informations <i class="fa fa-arrow-circle-right"></i></a>
         </div>
@@ -31,7 +31,7 @@
                 <p>Categories</p>
             </div>
             <div class="icon">
-                <i class="fa fa-list"></i>
+                <img src="{{ asset('categorieicon.png')}}" alt="categorieicon" width="60px">
             </div>
             <a href="{{ route('categories.index') }}" class="small-box-footer">Plus d'informations <i class="fa fa-arrow-circle-right"></i></a>
         </div>
@@ -45,7 +45,7 @@
                 <p>produits</p>
             </div>
             <div class="icon">
-                <i class="fa fa-cubes"></i>
+                <img src="{{ asset('produiticon.png')}}" alt="produiticon" width="60px">
             </div>
              <a href="{{ route('Produit.index') }}" class="small-box-footer">Plus d'informations <i class="fa fa-arrow-circle-right"></i></a> 
         </div>
@@ -60,7 +60,7 @@
             <p>clients</p>
             </div>
             <div class="icon">
-                <i class="fa fa-users"></i>
+                <img src="{{ asset('clienticon.png')}}" alt="clienticon" width="60px">
             </div>
             <a href="{{ route('client.index') }}" class="small-box-footer">Plus d'informations <i class="fa fa-arrow-circle-right"></i></a>
             
@@ -84,7 +84,7 @@
                 <p>commandes</p>
             </div>
             <div class="icon">
-                <i class="fa fa-cart-plus"></i>
+                <img src="{{ asset('commandeicon.png')}}" alt="commandeicon" width="60px">
             </div>
             <a href="{{ route('commandes.index') }}" class="small-box-footer">Plus d'informations <i class="fa fa-arrow-circle-right"></i></a>
         </div>

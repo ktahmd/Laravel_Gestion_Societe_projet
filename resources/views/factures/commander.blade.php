@@ -7,9 +7,9 @@
         </div>
 
         <div class="box-header">
-            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add commands</a>
-            <a onclick="pdff({{ $CM_ID }})" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
-            <a onclick="excell({{ $CM_ID }})" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
+            <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un produit</a>
+            <a onclick="pdff({{ $id }})" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
+            <a onclick="excell({{ $id }})" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
         </div>
         <div class="box-header">
            <h3 class="box-title"><h1><b>Détails des commandes de {{ $client }}</b></h1>
@@ -17,7 +17,7 @@
 
         <!-- Afficher les détails de la commande spécifique -->
         <div class="box-body">  
-            <table id="commandes-table" class="table table-bordered table-hover table-striped">
+            <table id="factures-table" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Produit</th>
@@ -29,17 +29,17 @@
                 </thead>
                 <tbody>
                     
-    @foreach($factures as $f)
+    {{-- @foreach($factures as $f)
         <tr>
             <td>{{ $f->produit->nom }}</td>
             <td>{{ $f->qty }}</td>
             <td>{{ $f->produit->prix }}</td>
             <td>{{ $f->qty * $f->produit->prix }}</td>
-            <td><a onclick="editForm('. $f->id .')" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i> Edit</a> 
-                <a onclick="deleteData('. $f->id .')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+            <td><a onclick="editForm({{ $f->id }})" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i> Edit</a> 
+                <a onclick="deleteData({{ $f->id }})" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>
             </td>
         </tr>
-    @endforeach
+    @endforeach --}}
 
 
                 </tbody>
@@ -65,6 +65,8 @@
                 
                     
                     <input type="hidden" id="id" name="id">
+                    <input type="hidden" id="client_id" name="client_id" value={{$idclient}}>
+                    <input type="hidden" id="commandes_id" name="commandes_id" value={{$id}}>
                     <div class="form-group">
                         <label for="produit_id" class="control-label">prodiut:</label>
                         {!! Form::select('produit_id', App\Models\Produit::pluck('nom', 'id'), null, ['class' => 'form-control select', 'placeholder' => '-- Choose Produit --', 'id' => 'produit_id', 'required']) !!}
@@ -94,30 +96,46 @@
         <script src="{{ asset('assets/validator/validator.min.js') }}"></script>
     
         <script type="text/javascript">
-            
+            var table = $('#factures-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ url('apifactures') }}"+"/{{ $id }}",
+            columns: [
+                {data: 'produit_nom', name: 'produit'},
+                {data: 'qty', name: 'Quantité'},
+                {data: 'prix_u', name: 'Prix_unitaire'},
+                {data: 'TOTO', name: 'TOTO'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
+            });
+
             $(document).ready(function() {
-            var totalPaye = 0;
+                var totalPaye = 0;
+                var id = 1;
 
-            // Calculer la somme du montant total des commandes
-            $('#commandes-table tbody tr').each(function() {
-                var montant = parseFloat($(this).find('td:eq(3)').text());
-                totalPaye += montant;
+                table.on('draw', function () {
+                    totalPaye = 0;
+                    table.rows().every(function () {
+                        var data = this.data();
+                        totalPaye += parseFloat(data.TOTO);
+                    });
+                    $('#totalPaye').text(totalPaye.toFixed(2) + ' MRU');
+                });
             });
-            $('#totalPaye').text(totalPaye.toFixed(2) + ' MRU');
-            });
+
+
             
-            function pdff(CM_ID) {
+            function pdff(id) {
                 save_method = 'open';
-                url = "{{ url('exportfacturesAll') }}" + "/" + CM_ID;
+                url = "{{ url('exportfacturesAll') }}" + "/" + id;
                 window.open(url, '_blank');
             }
 
-            function excell(CM_ID) {
+            function excell(id) {
                 save_method = 'open';
-                url = "{{ url('exportfacturesAllExcel') }}" + "/" + CM_ID;
+                url = "{{ url('exportfacturesAllExcel') }}" + "/" + id;
                 window.open(url, '_blank');
             }
-    
     
             function addForm(id) {
                 save_method = "add";
@@ -126,46 +144,7 @@
                 $('.modal-title').text('Add factures');
                 $('#form-item')[0].reset();
                 $('#id').val('');
-                $.ajax({
-                    url: "{{ url('factures') }}" + '/' + id + "/store",
-                    type: "GET",
-                    dataType: "JSON",
-                    success: function(data) {
-                        $('#modal-form').modal('show');
-                        $('.modal-title').text('Edit factures');
-                        $('#id').val(data.id); 
-                        $('#nom').val(data.nom); 
-                        $('#adresse').val(data.adresse);  
-                        $('#email').val(data.email);
-                        $('#telephone').val(data.telephone);
-                    },
-                    error : function() {
-                        alert("Nothing Data");
-                    }
-                });
             }
-        function editForm(id) {
-        save_method = 'edit';
-        $('input[name=_method]').val('PATCH');
-        $('#modal-form form')[0].reset();
-        $.ajax({
-            url: "{{ url('factures') }}" + '/' + id + "/edit",
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                $('#modal-form').modal('show');
-                $('.modal-title').text('Edit factures');
-                $('#id').val(data.id); 
-                $('#nom').val(data.nom); 
-                $('#adresse').val(data.adresse);  
-                $('#email').val(data.email);
-                $('#telephone').val(data.telephone);
-            },
-            error : function() {
-                alert("Nothing Data");
-            }
-        });
-    }
     
         function deleteData(id){
         var csrf_token = $('meta[name="csrf-token"]').attr('content');
@@ -207,11 +186,7 @@
         $('#modal-form form').validator().on('submit', function (e) {
             e.preventDefault(); // Prevent default form submission
             var id = $('#id').val();
-            var url = "{{ url('factures') }}";
-            if (save_method == 'edit') {
-                url = "{{ url('factures') }}" + '/' + id + "/update";
-            }
-    
+            var url = "{{ url('factures') }}" ;    
             // Retrieve CSRF token value from meta tag
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
     

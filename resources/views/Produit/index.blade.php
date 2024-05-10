@@ -96,7 +96,7 @@
                 {data: 'description', name: 'description'},
                 {data: 'prix', name: 'prix'},
                 {data: 'quantite_stock', name: 'quantite_stock'},
-                {data: 'categorie_nom', name: 'categorie_nom'}, // Changed 'orderable' to true for sorting
+                {data: 'categorie_nom', name: 'categorie_nom'}, 
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

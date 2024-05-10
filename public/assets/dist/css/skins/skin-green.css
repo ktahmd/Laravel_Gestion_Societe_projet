@@ -3,7 +3,7 @@
  * -----------
  */
 .skin-green .main-header .navbar {
-  background-color:  #08a35d;
+  background-color:  #ff7a5a;
 }
 .skin-green .main-header .navbar .nav > li > a {
   color: #ffffff;
@@ -51,7 +51,7 @@
   background-color:  #14181d;
 }
 .skin-green .main-header li.user-header {
-  background-color: #00a65a;
+  background-color: #252c35;
 }
 .skin-green .content-header {
   background: transparent;

@@ -8,8 +8,6 @@
 
         <div class="box-header">
             <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus"></i> Add commandes</a>
-            <a href="{{ route('exportPDF.commandesAll') }}" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
-            <a href="{{ route('exportExcel.commandesAll') }}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export Excel</a>
         </div>
 
         <!-- /.box-header -->
@@ -20,7 +18,6 @@
                     <th>ID</th>
                     <th>Client</th>
                     <th>Date_commande</th>
-                    <th>Prix Total</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -87,7 +84,6 @@
                         return new Date(data).toISOString().split('T')[0];
                     }
                 },
-                {data: 'prix_total', name: 'prix_total'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

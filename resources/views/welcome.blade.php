@@ -5,14 +5,13 @@
 
     <title>Login | G.S</title>
     <style>
-        .custom-body {
-            background-image: url('{{ asset('background.jpg') }}'); /* Use asset() function to generate the correct URL */
-            background-size: cover;
+        /* .custom-body {
+            background-image: url('{{ asset('background.jpg') }}'); 
             background-position: center;
             background-repeat: no-repeat;
-            /* Add additional styles as needed */
+            
         }
-        /* Pseudo-element for the background image */
+        
         .custom-body::before {
             content: "";
             position: absolute;
@@ -20,8 +19,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(9, 26, 13, 0.81); /* Adjust the alpha value (0.5) to make it darker or lighter */
-        }
+            background-color: rgba(9, 26, 13, 0.81); 
+        } */
     </style>
     <!-- Log on to codeastro.com for more projects! -->
     <meta charset="utf-8">

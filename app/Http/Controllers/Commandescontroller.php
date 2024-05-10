@@ -127,19 +127,19 @@ class Commandescontroller extends Controller
 
 
 
-    public function exportCommandesAll()
-    {
-        
-        $Commandes = Commandes::all();
-        $pdf = PDF::loadView('Commandes.CommandesAllPDF',compact('Commandes'));
-        return $pdf->download('Commandes.pdf');
-    }
 
-    public function exportExcel()
-    {
-        return (new ExportCommandes)->download('Commandes.xlsx'); 
-    }
+    // public function updateToto($id)
+    // {
+    // $commande = Commandes::findOrFail($id);
+    // $totalPaye = request()->input('totalPaye'); // corrected request parameter
+    // $commande->prix_total = $totalPaye;
+    // $commande->save();
+
+    // return response()->json(['success' => true]);
+    // }
+
 }
+
 
 
 

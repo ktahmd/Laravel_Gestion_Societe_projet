@@ -57,14 +57,10 @@ class facturesController extends Controller
         
         $this->validate($request, [
             'qty' => 'required|integer',
-            'prix_total' => 'required|numeric',
+            
         ]);
          
-        $factures = new factures();
-        $factures->client_id = $request->input('client_id');
-        $factures->commandes_id = $request->input('client_id');
-        $factures->Produit_id = $request->input('client_id');
-        $factures->save();
+        factures::create($request->all());
 
         return response()->json([
             'success'    => true,
@@ -109,7 +105,7 @@ class facturesController extends Controller
     {
         $this->validate($request, [
             'qty' => 'required|integer',
-            'prix_total' => 'required|numeric',
+            
         ]);
 
         $factures = factures::findOrFail($id);
@@ -138,13 +134,17 @@ class facturesController extends Controller
         ]);
     }
 
-    public function apifactures()
+    public function apifactures($id)
     {
-        $factures = factures::with('produit')->get(); 
+        $factures = Factures::with('produit')->where('commandes_id', $id)->get();
+
     
             return Datatables::of($factures)
             ->addColumn('produit_nom', function($factures) {
                 return $factures->produit->nom ; 
+            })
+            ->addColumn('qty', function($factures) {
+                return $factures->qty ; 
             })
             ->addColumn('prix_u', function($factures) {
                 return $factures->produit->prix ; 
@@ -154,21 +154,21 @@ class facturesController extends Controller
                 $P=$factures->Produit->prix;
                 return $Q*$P ; 
             })
+            
             ->addColumn('action', function($factures){
-                return '<a onclick="editForm('. $factures->id .')" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i> Edit</a> ' .
-                    '<a onclick="deleteData('. $factures->id .')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                return '<a onclick="deleteData('. $factures->id .')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
             })
             ->rawColumns(['action'])->make(true);
     }
 
 
 
-    public function exportfacturesAll($CM_ID)
+    public function exportfacturesAll($id)
 {
-    $commandes = Commandes::findOrFail($CM_ID);
+    $commandes = Commandes::findOrFail($id);
     $client = $commandes->client->nom;
-    $factures = Factures::where('commandes_id', $CM_ID)->get();
-    $IDD=$CM_ID;
+    $factures = Factures::where('commandes_id', $id)->get();
+    // $IDD=$id;
     $date=$commandes->created_at;
     
     $pdf = PDF::loadView('factures.facturesAllPDF',compact('factures','client','commandes'));
@@ -177,11 +177,11 @@ class facturesController extends Controller
 
 
 
-public function exportExcel($CM_ID)
+public function exportExcel($id)
 {
-    $commande = Commandes::findOrFail($CM_ID);
+    $commande = Commandes::findOrFail($id);
     $client = $commande->client->nom;
-    $factures = Factures::where('commandes_id', $CM_ID)->get();
+    $factures = Factures::where('commandes_id', $id)->get();
     $date = $commande->created_at;
 
     return Excel::download(function () use ($factures, $client, $date) {
@@ -196,8 +196,8 @@ public function exportExcel($CM_ID)
     $commandes = Commandes::findOrFail($id);
     $client = $commandes->client->nom;
     $factures = Factures::where('commandes_id', $id)->get();
-    $CM_ID=$id;
-    return view('factures.commander', compact('commandes','CM_ID', 'client', 'factures'));
+    $idclient= $commandes->client->id;
+    return view('factures.commander', compact('commandes','idclient', 'id','client', 'factures'));
 }
 
     

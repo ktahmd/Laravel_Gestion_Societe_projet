@@ -5,13 +5,13 @@
     <title>Login | G.S</title>
     <style>
         .custom-body {
-            background-image: url('{{ asset('background.jpg') }}'); /* Use asset() function to generate the correct URL */
+            /* background-image: url('{{ asset('background.jpg') }}'); 
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            /* Add additional styles as needed */
+            background-repeat: no-repeat; */
+            
         }
-        /* Pseudo-element for the background image */
+       
         .custom-body::before {
             content: "";
             position: absolute;
@@ -19,7 +19,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(9, 26, 13, 0.81); /* Adjust the alpha value (0.5) to make it darker or lighter */
+            /* background-color: rgba(9, 26, 13, 0.81);  */
         }
     </style>
     <!-- Log on to codeastro.com for more projects! -->
@@ -27,8 +27,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- VENDOR CSS -->
-    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/vendor/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/font-awesome/css/font-awesome.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendor/linearicons/style.css')}}">
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
